@@ -97,7 +97,7 @@ class eventMaster extends eventTypeMaster
             return "INVALID_EVENT_ID";
         }
     }
-    function getEvents($offset=0,$eventTypeID=NULL)
+    function getEvents($offset=0,$eventTypeID=NULL,$userID=NULL)
     {
         $app=$this->app;
         $offset=addslashes(htmlentities($offset));
@@ -112,10 +112,23 @@ class eventMaster extends eventTypeMaster
                     return "INVALID_EVENT_TYPE_ID";
                 }
             }
+            if($userID!=NULL)
+            {
+                $userID=addslashes(htmlentities($userID));
+                userMaster::__construct($userID);
+                if(!$this->userValid)
+                {
+                    return "INVALID_USER_ID";
+                }
+            }
             $em="SELECT idevent_master FROM event_master WHERE stat='1' ";
             if($eventTypeID!=NULL)
             {
                 $em.="AND event_type_master_idevent_type_master='$eventTypeID' ";
+            }
+            if($userID!=NULL)
+            {
+                $em.="AND user_master_iduser_master='$userID' ";
             }
             $em.="ORDER BY idevent_master DESC LIMIT $offset,20";
             $em=$app['db']->fetchAll($em);
