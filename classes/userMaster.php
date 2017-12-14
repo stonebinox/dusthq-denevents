@@ -85,7 +85,6 @@ class userMaster extends adminMaster
         $app=$this->app;
         $userEmail=addslashes(htmlentities($userEmail));
         $um="SELECT iduser_master FROM user_master WHERE stat='1' AND user_email='$userEmail'";
-        echo $um;
         $um=$app['db']->fetchAssoc($um);
         if(($um!="")&&($um!=NULL))
         {
@@ -122,7 +121,7 @@ class userMaster extends adminMaster
     {
         $userEmail=addslashes(htmlentities($userEmail));
         $userID=$this->getUserIDFromEmail($userEmail);
-        echo $userID;
+
         $app=$this->app;
         if(is_numeric($userID))
         {
@@ -143,7 +142,7 @@ class userMaster extends adminMaster
         }
         else
         {
-            return "INVALID_USER_CREDENTIALS_HERE";
+            return "INVALID_USER_CREDENTIALS";
         }
     }
     function createAccount($userName,$userEmail,$userPassword,$userPassword2,$adminID=1) //to create an account

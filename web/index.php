@@ -69,15 +69,14 @@ $app->post("/login_action",function(Request $request) use($app){
         require("../classes/adminMaster.php");
         require("../classes/userMaster.php");
         $user=new userMaster;
-        $auth=$user->authenticateUser($request->get("user"),$request->get("password"));
+        $auth=$user->authenticateUser($request->get("email"),$request->get("password"));
         if($auth=="AUTHENTICATE_USER")
         {
             return $app->redirect("/profile");
         }
         else
         {
-            // return $app->redirect("/login?err=".$auth);
-            return "DONE";
+            return $app->redirect("/login?err=".$auth);
         }
     }
     else
