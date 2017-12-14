@@ -132,6 +132,10 @@ $app->get("/user/getUser",function() use($app){
         require("../classes/userMaster.php");
         $user=new userMaster($app['session']->get("uid"));
         $userData=$user->getUser();
+        if(is_array($userData))
+        {
+            return json_encode($userData);
+        }
         return $userData;
     }
     else
