@@ -121,6 +121,7 @@ class userMaster extends adminMaster
     {
         $userEmail=addslashes(htmlentities($userEmail));
         $userID=$this->getUserIDFromEmail($userEmail);
+        echo $userID;
         $app=$this->app;
         if(is_numeric($userID))
         {

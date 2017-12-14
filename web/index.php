@@ -76,7 +76,8 @@ $app->post("/login_action",function(Request $request) use($app){
         }
         else
         {
-            return $app->redirect("/login?err=".$auth);
+            // return $app->redirect("/login?err=".$auth);
+            return "DONE";
         }
     }
     else
