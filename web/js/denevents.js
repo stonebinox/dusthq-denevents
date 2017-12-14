@@ -142,7 +142,8 @@ app.controller("profile",function($scope,$compile,$http){
             if(!validate(userDP)){
                 userDP='images/defaultm.jpg';
             }
-            $("#accountheader").html('<img src="'+userDP+'" class="img-circle" width=15 height=15>&nbsp;'+userName);
+            $("#accountheader").html('<img src="'+userDP+'" class="img-circle" width=17 height=17>&nbsp;'+userName+' <span class="caret"></span>');
+            $("#accountheader").parent().append('<ul class="dropdown-menu"><li><a href="#">Tickets <span class="badge">{{ticketCount}}</span></a></li><li><a href="#">Saved <span class="badge">{{savedCount}}</span></a></li><li><a href="#">Manage events</a></li><li><a href="#">Contacts</a></li><li><a href="profile">Account settings</a></li><li><a href="logout">Log out</a></li></ul>');
         }
     }
 });
