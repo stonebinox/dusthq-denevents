@@ -14,8 +14,23 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Browse Events</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-th-large"></span> Organize</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Help</a></li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-th-large"></span> Organize
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Overview</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Resources</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-comment"></span> Help
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Where are my tickets?</a></li>
+                            <li><a href="#">How to contact the event organizer?</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#" id="accountheader"><span class="glyphicon glyphicon-user"></span> Sign in</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-plus"></span> Create Event</a></li>
                 </ul>
@@ -26,7 +41,7 @@
         <div id="hero-event"></div>
         <div class="well">
             <h1 class="text-center">Find your next experience</h1>
-            
+
         </div>
     </div>
     <div class="container-fluid">
