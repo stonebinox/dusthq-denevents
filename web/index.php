@@ -31,5 +31,18 @@ $app->before(function(Request $request) use($app){
 $app->get("/",function() use($app){
     $app['twig']->render("index.html.twig");
 });
+$app->get("/events/getEvents",function() use($app){
+    require("../classes/adminMaster.php");
+    require("../classes/userMaster.php");
+    require("../classes/eventTypeMaster.php");
+    require("../classes/eventMaster.php");
+    $event=new eventMaster;
+    $events=$event->getEvents();
+    if(is_array($events))
+    {
+        return json_encode($events);
+    }
+    return $events;
+});
 $app->run();
 ?>

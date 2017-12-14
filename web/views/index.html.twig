@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
+<body ng-app="denevents" ng-controller="home">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -22,8 +22,8 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        
+    <div class="container-fluid">
+        <div id="hero-event"></div>
     </div>
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog"></div>
