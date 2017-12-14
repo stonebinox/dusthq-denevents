@@ -27,6 +27,7 @@ app.controller("home",function($scope,$compile,$http){
                     break;
                     case "NO_EVENTS_FOUND":
                     messageBox("No Events Found","No events found.");
+                    $("#eventlist").html('<p>No events found.</p>');
                     break;
                 }
             }
