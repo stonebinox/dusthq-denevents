@@ -157,5 +157,15 @@ $app->get("/logout",function() use($app){
         return "INVALID_PARAMETERS";
     }
 });
+$app->get("/createEvent",function() use($app){
+    if($app['session']->get("uid"))
+    {
+        return $app['twig']->render("event.html.twig");
+    }
+    else
+    {
+        return $app->redirect("/login");
+    }
+});
 $app->run();
 ?>
