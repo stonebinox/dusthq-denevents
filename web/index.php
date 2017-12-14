@@ -147,7 +147,7 @@ $app->get("/logout",function() use($app){
     if($app['session']->get("uid"))
     {
         require("../classes/adminMaster.php");
-        require("../classes/userMasterphp");
+        require("../classes/userMaster.php");
         $user=new userMaster($app['session']->get("uid"));
         $response=$user->logout();
         return $app->redirect("/");
