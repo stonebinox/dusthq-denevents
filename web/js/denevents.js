@@ -106,3 +106,43 @@ app.controller("home",function($scope,$compile,$http){
         }
     }; 
 });
+app.controller("profile",function($scope,$compile,$http){
+    $scope.userArray=[];
+    $scope.getUser=function(){
+        $http.get("user/getUser")
+        .then(function success(response){
+            response=response.data;
+            if(typeof response=="object"){
+                $scope.userArray=response;
+                $scope.changeHeader();
+            }
+            else{
+                response=$.trim(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while performing this action. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "INVALID_USER_ID":
+                    window.location='https://dusthq-denevents.herokuapp.com/';
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while performing this action. Please try again later.");
+        });
+    };
+    $scope.changeHeader=function(){
+        if(validate($scope.userArray)){
+            var user=$scope.userArray;
+            var userName=stripslashes(user.user_name);
+            var userDP=user.user_dp;
+            if(!validate(userDP)){
+                userDP='images/defaultm.jpg';
+            }
+            $("#accountheader").html('<img src="'+userDP+'" class="img-circle" width=40 height=40>&nbsp;'+userName);
+        }
+    }
+});
