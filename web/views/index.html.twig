@@ -41,7 +41,16 @@
         <div id="hero-event"></div>
         <div class="well">
             <h1 class="text-center">Find your next experience</h1>
-            
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" id="search" name="search" placeholder="Search events or categories" class="form-control">
+                    <select name="dates" id="dates" class="form-control">
+                        <option value="-1">All dates</option>
+                        <option value="today">Today</option>
+                        <button type="button" class="btn btn-primary">Search</button>
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
     <div class="container-fluid">
