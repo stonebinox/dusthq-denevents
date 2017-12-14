@@ -57,7 +57,42 @@ $app->get("/events/getEventTypes",function() use($app){
     return $eventTypes;
 });
 $app->get("/login",function() use($app){
+    if($app['session']->get("uid"))
+    {
+        return $app->redirect("/profile");
+    }
     return $app['twig']->render("login.html.twig");
+});
+$app->post("/login_action",function(Request $request) use($app){
+    if(($request->get("email"))&&($request->get("password")))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        $user=new userMaster;
+        $auth=$user->authenticateUser($request->get("user"),$request->get("password"));
+        if($auth=="AUTHENTICATE_USER")
+        {
+            return $app->redirect("/profile");
+        }
+        else
+        {
+            return $app->redirect("/login?err=".$auth);
+        }
+    }
+    else
+    {
+        return $app->redirect("/login?err=INVALID_CREDENTIALS");
+    }
+});
+$app->get("/profile",function() use($app){
+    if($app['session']->get("uid"))
+    {
+        return $app['twig']->render("profile.html.twig");
+    }
+    else
+    {
+        return $app->redirect("/login");
+    }
 });
 $app->run();
 ?>
