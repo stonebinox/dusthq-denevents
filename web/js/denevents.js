@@ -8,6 +8,9 @@ var app=angular.module("denevents",[]);
 app.controller("home",function($scope,$compile,$http){
     $scope.eventsArray=[];
     $scope.heroPosition=0;
+    $scope.getUser=function(){
+        $scope.$root.$broadcast("getUser");
+    };
     $scope.eventTypeArray=[];
     $scope.getEvents=function(){
         $http.get("events/getEvents")
@@ -108,6 +111,9 @@ app.controller("home",function($scope,$compile,$http){
 });
 app.controller("profile",function($scope,$compile,$http){
     $scope.userArray=[];
+    $scope.$on("getUser",function(){
+        $scope.getUser();
+    });
     $scope.getUser=function(){
         $http.get("user/getUser")
         .then(function success(response){
