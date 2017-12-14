@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-<body ng-app="denevents" ng-controller="home">
-    <nav class="navbar navbar-default" ng-init="getEvents();getEventTypes();">
+<body>
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -31,40 +31,29 @@
                             <li><a href="#">Help Center</a></li>
                         </ul>
                     </li>
-                    <li><a href="login" id="accountheader"><span class="glyphicon glyphicon-user"></span> Sign in</a></li>
+                    <li class="active"><a href="login" id="accountheader"><span class="glyphicon glyphicon-user"></span> Sign in</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-plus"></span> Create Event</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
-        <div id="hero-event"></div>
+        <h1 class="text-center">Login to your account</h1>
         <div class="well">
-            <h1 class="text-center">Find your next experience</h1>
-            <div class="text-center">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <input type="text" id="search" name="search" placeholder="Search events or categories" class="form-control">
-                        <select name="dates" id="dates" class="form-control">
-                            <option value="-1">All dates</option>
-                            <option value="today">Today</option>
-                            <option value="tomorrow">Tomorrow</option>
-                            <option value="thisweek">This week</option>
-                            <option value="neweek">Next week</option>
-                            <option value="this">This month</option>
-                            <option value="thisweek">Next month</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-primary">Search</button>
-                </form>
-            </div>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" name="email" placeholder="Enter a valid email ID" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Enter your account password" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location='registration';">Already have an account?</button>
+                </div>
+            </form>
         </div>
-        <hr>
-        <h3 class="text-center">Browse Events</h3>
-        <div class="well" id="eventlist"></div>
-        <hr>
-        <h3 class="text-center">Browse by category</h3>
-        <div id="categorylist"></div>
     </div>
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog"></div>

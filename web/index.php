@@ -26,10 +26,10 @@ $app->register(new Silex\Provider\SessionServiceProvider, array(
     'session.storage.save_path' => dirname(__DIR__) . '/tmp/sessions'
 ));
 $app->before(function(Request $request) use($app){
-    $request->getSession()->start();
+    return $request->getSession()->start();
 });
 $app->get("/",function() use($app){
-    $app['twig']->render("index.html.twig");
+    return $app['twig']->render("index.html.twig");
 });
 $app->get("/events/getEvents",function() use($app){
     require("../classes/adminMaster.php");
@@ -55,6 +55,9 @@ $app->get("/events/getEventTypes",function() use($app){
         return json_encode($eventTypes);
     }
     return $eventTypes;
+});
+$app->get("/login",function() use($app){
+    return $app['twig']->render("login.html.twig");
 });
 $app->run();
 ?>
