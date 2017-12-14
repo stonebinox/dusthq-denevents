@@ -41,22 +41,27 @@
         <div id="hero-event"></div>
         <div class="well">
             <h1 class="text-center">Find your next experience</h1>
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" id="search" name="search" placeholder="Search events or categories" class="form-control">
-                    <select name="dates" id="dates" class="form-control">
-                        <option value="-1">All dates</option>
-                        <option value="today">Today</option>
-                        <option value="tomorrow">Tomorrow</option>
-                        <option value="thisweek">This week</option>
-                        <option value="neweek">Next week</option>
-                        <option value="this">This month</option>
-                        <option value="thisweek">Next month</option>
-                    </select>
-                </div>
-                <button type="button" class="btn btn-primary">Search</button>
-            </form>
+            <div class="texr-center">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" id="search" name="search" placeholder="Search events or categories" class="form-control">
+                        <select name="dates" id="dates" class="form-control">
+                            <option value="-1">All dates</option>
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="thisweek">This week</option>
+                            <option value="neweek">Next week</option>
+                            <option value="this">This month</option>
+                            <option value="thisweek">Next month</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary">Search</button>
+                </form>
+            </div>
         </div>
+        <hr>
+        <h3>Browse Events</h3>
+        <div id="eventlist"></div>
     </div>
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog"></div>
