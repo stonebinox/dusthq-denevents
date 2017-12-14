@@ -8,6 +8,7 @@ var app=angular.module("denevents",[]);
 app.controller("home",function($scope,$compile,$http){
     $scope.eventsArray=[];
     $scope.heroPosition=0;
+    $scope.eventTypeArray=[];
     $scope.getEvents=function(){
         $http.get("events/getEvents")
         .then(function success(response){
@@ -36,6 +37,38 @@ app.controller("home",function($scope,$compile,$http){
             console.log(response);
             messageBox("Problem","Something went wrong while loading events on this page. Please try again later.");
         });
+    };
+    $scope.getEventTypes=function(){
+        $http.get("event/getEventTypes")
+        .then(function success(response){
+            response=response.data;
+            console.log(response);
+            if(typeof response=="object"){
+                $scope.eventTypeArray=response;
+                $scope.displayEventTypes();
+            }
+            else{
+                response=$.trim(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while trying to get event categories. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "NO_EVENT_TYPES_FOUND":
+                    $("#categorylist").html('<p class="text-center">No categories found.</p>');
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while performing this action. Please try again later.");
+        });
+    }; 
+    $scope.displayEventTypes=function(){
+        if(validate($scope.eventTypeArray)){
+            
+        }
     };
     $scope.startHeroEvent=function(){
         if(validate($scope.eventsArray)){

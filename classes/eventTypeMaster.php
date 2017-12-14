@@ -64,5 +64,31 @@ class eventTypeMaster extends userMaster
             return "INVALID_EVENT_TYPE_ID";
         }
     }
+    function getEventTypes()
+    {
+        $app=$this->app;
+        $etm="SELECT idevent_type_master FROM event_type_master WHERE stat='1' ORDER BY type_name ASC";
+        $etm=$app['db']->fetchAll($etm);
+        $eventTypeArray=array();
+        for($i=0;$i<count($etm);$i++)
+        {
+            $eventTypeRow=$eventTypeArray[$i];
+            $eventTypeID=$eventTypeRow['idevent_type_master'];
+            $this->__construct($eventTypeID);
+            $eventType=$this->getEventType();
+            if(is_array($eventType))
+            {
+                array_push($eventTypeArray,$eventType);
+            }
+        }
+        if(count($eventTypeArray)>0)
+        {
+            return $eventTypeArray;
+        }
+        else
+        {
+            return "NO_EVENT_TYPES_FOUND";
+        }
+    }
 }
 ?>

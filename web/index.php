@@ -44,5 +44,17 @@ $app->get("/events/getEvents",function() use($app){
     }
     return $events;
 });
+$app->get("/events/getEventTypes",function() use($app){
+    require("../classes/adminMaster.php");
+    require("../classes/userMaster.php");
+    require("../classes/eventTypeMaster.php");
+    $eventType=new eventTypeMaster;
+    $eventTypes=$eventType->getEventTypes();
+    if(is_array($eventTypes))
+    {
+        return json_encode($eventTypes);
+    }
+    return $eventTypes;
+});
 $app->run();
 ?>
