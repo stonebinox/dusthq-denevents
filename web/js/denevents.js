@@ -142,7 +142,7 @@ app.controller("profile",function($scope,$compile,$http){
             if(!validate(userDP)){
                 userDP='images/defaultm.jpg';
             }
-            $("#accountheader").html('<img src="'+userDP+'" class="img-circle" width=40 height=40>&nbsp;'+userName);
+            $("#accountheader").html('<img src="'+userDP+'" class="img-circle" width=15 height=15>&nbsp;'+userName);
         }
     }
 });
