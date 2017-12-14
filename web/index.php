@@ -147,10 +147,10 @@ $app->get("/logout",function() use($app){
     if($app['session']->get("uid"))
     {
         require("../classes/adminMaster.php");
-        require("../classes/userMaster,php");
+        require("../classes/userMasterphp");
         $user=new userMaster($app['session']->get("uid"));
         $response=$user->logout();
-        return $response;
+        return $app->redirect("/");
     }
     else
     {
