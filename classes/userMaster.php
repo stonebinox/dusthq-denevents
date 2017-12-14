@@ -141,7 +141,7 @@ class userMaster extends adminMaster
         }
         else
         {
-            return "INVALID_USER_CREDENTIALS_HERE";
+            return "INVALID_USER_CREDENTIALS";
         }
     }
     function createAccount($userName,$userEmail,$userPassword,$userPassword2,$adminID=1) //to create an account
@@ -165,7 +165,7 @@ class userMaster extends adminMaster
                             if(($um=="")||($um==NULL))
                             {
                                 $hashPassword=md5($userPassword);
-                                $in="INSERT INTO user_master (timestamp,user_name,user_email,user_password) VALUES (NOW(),'$userName','$userEmail','$hashPassword')";
+                                $in="INSERT INTO user_master (timestamp,user_name,user_email,user_password,admin_master_idadmin_master) VALUES (NOW(),'$userName','$userEmail','$hashPassword','$adminID')";
                                 $in=$app['db']->executeQuery($in);
                                 return "ACCOUNT_CREATED";
                             }
