@@ -85,6 +85,7 @@ class userMaster extends adminMaster
         $app=$this->app;
         $userEmail=addslashes(htmlentities($userEmail));
         $um="SELECT iduser_master FROM user_master WHERE stat='1' AND user_email='$userEmail'";
+        echo $um;
         $um=$app['db']->fetchAssoc($um);
         if(($um!="")&&($um!=NULL))
         {
