@@ -94,5 +94,15 @@ $app->get("/profile",function() use($app){
         return $app->redirect("/login");
     }
 });
+$app->get("/registration",function() use($app){
+    if($app['session']->get("uid"))
+    {
+        return $app->redirect("/profile");
+    }
+    else
+    {
+        return $app['twig']->render("registration.html.twig");
+    }
+});
 $app->run();
 ?>
