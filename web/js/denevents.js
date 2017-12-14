@@ -39,7 +39,7 @@ app.controller("home",function($scope,$compile,$http){
         });
     };
     $scope.getEventTypes=function(){
-        $http.get("event/getEventTypes")
+        $http.get("events/getEventTypes")
         .then(function success(response){
             response=response.data;
             console.log(response);
@@ -67,7 +67,7 @@ app.controller("home",function($scope,$compile,$http){
     }; 
     $scope.displayEventTypes=function(){
         if(validate($scope.eventTypeArray)){
-            
+
         }
     };
     $scope.startHeroEvent=function(){
