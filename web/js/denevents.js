@@ -228,7 +228,7 @@ app.controller("event",function($scope,$http,$compile){
         }
     };
     $scope.getEventTypes=function(){
-        $http.get("events/getEvents")
+        $http.get("events/getEventTypes")
         .then(function success(response){
             response=response.data;
             if(typeof response=="object"){
