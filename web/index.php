@@ -184,8 +184,8 @@ $app->get("/createEvent",function() use($app){
         return $app->redirect("/login");
     }
 });
-$app->post("/events/createEvent",function(Request $request){
-    if(($request->get("title"))&&($request->get("eventType")))
+$app->post("/events/createEvent",function(Request $request) use($app){
+    if(($request->get("title"))&&($request->get("eventtype")))
     {
         require("../classes/adminMaster.php");
         require("../classes/userMaster.php");
