@@ -152,3 +152,38 @@ app.controller("profile",function($scope,$compile,$http){
         }
     }
 });
+app.controller("event",function($scope,$http,$compile){
+    $scope.validateEvent=function(){
+        var title=$.trim($("#title").val());
+        if(validate(title)){
+            $("#title").parent().removeClass("has-error");
+            var address=$.trim($("#address").val());
+            if(validate(address)){
+                $("#address").parent().removeClass("has-error");
+                var city=$.trim($("#city").val());
+                if(validate(city)){
+                    $("#city").parent().removeClass("has-error");
+                    var zip=$.trim($("#zip").val());
+                    if(validate(zip)){
+                        $("#zip").parent().removeClass("has-error");
+                        var eStart=$("#estart").val();
+                        var eEnd=$("#eend").val();
+                        console.log(eStart,eEnd);
+                    }
+                    else{
+                        $("#zip").parent().addClass("has-error");
+                    }
+                }
+                else{
+                    $("#city").parent().addClass("has-error");
+                }
+            }
+            else{
+                $("#address").parent().addClass("has-error");
+            }
+        }
+        else{
+            $("#title").parent().addClass("has-error");
+        }
+    };
+});
