@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-<body ng-app="denevents" ng-controller="home">
-    <nav class="navbar navbar-default" ng-init="getEvents();getEventTypes();">
+<body ng-app="denevents" ng-controller="profile" ng-init="getUser()">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,39 +32,14 @@
                         </ul>
                     </li>
                     <li><a href="login" id="accountheader"><span class="glyphicon glyphicon-user"></span> Account</a></li>
-                    <li><a href="createEvent"><span class="glyphicon glyphicon-plus"></span> Create Event</a></li>
+                    <li class="active"><a href="#"><span class="glyphicon glyphicon-plus"></span> Create Event</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div id="hero-event"></div>
-        <div class="well">
-            <h1 class="text-center">Find your next experience</h1>
-            <div class="text-center">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <input type="text" id="search" name="search" placeholder="Search events or categories" class="form-control">
-                        <select name="dates" id="dates" class="form-control">
-                            <option value="-1">All dates</option>
-                            <option value="today">Today</option>
-                            <option value="tomorrow">Tomorrow</option>
-                            <option value="thisweek">This week</option>
-                            <option value="neweek">Next week</option>
-                            <option value="this">This month</option>
-                            <option value="thisweek">Next month</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-primary">Search</button>
-                </form>
-            </div>
-        </div>
-        <hr>
-        <h3 class="text-center">Browse Events</h3>
-        <div class="well" id="eventlist"></div>
-        <hr>
-        <h3 class="text-center">Browse by category</h3>
-        <div id="categorylist"></div>
+    <div class="container">
+        <h1 class="text-center">Create an event</h1>
+
     </div>
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog"></div>
