@@ -9,6 +9,7 @@ app.controller("home",function($scope,$compile,$http){
     $scope.eventsArray=[];
     $scope.heroPosition=0;
     $scope.getUser=function(){
+        console.log("here");
         $scope.$root.$broadcast("getUser");
     };
     $scope.eventTypeArray=[];
