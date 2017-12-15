@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <body ng-app="denevents" ng-controller="home">
-    <nav class="navbar navbar-default" ng-init="getEvents();getEventTypes();getUser();">
+    <nav class="navbar navbar-default" ng-init="getEvents();getEventTypes();">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -31,7 +31,7 @@
                             <li><a href="#">Help Center</a></li>
                         </ul>
                     </li>
-                    <li><a href="login" id="accountheader"><span class="glyphicon glyphicon-user"></span> Sign in</a></li>
+                    <li><a href="login" id="accountheader"><span class="glyphicon glyphicon-user"></span> Account</a></li>
                     <li><a href="createEvent"><span class="glyphicon glyphicon-plus"></span> Create Event</a></li>
                 </ul>
             </div>
