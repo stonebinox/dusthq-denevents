@@ -172,7 +172,7 @@ app.controller("event",function($scope,$http,$compile){
                             var eEnd=$("#eend").val();
                             if(validate(eEnd)){
                                $("#eend").parent().removeClass("has-error");
-                                var img=$("#eventimg").files[0];
+                                var img=document.eventcreate.eventimg.files[0];
                                 console.log(img);
                             }
                             else{
