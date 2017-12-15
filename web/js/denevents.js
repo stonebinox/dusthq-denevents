@@ -9,7 +9,6 @@ app.controller("home",function($scope,$compile,$http){
     $scope.eventsArray=[];
     $scope.heroPosition=0;
     $scope.getUser=function(){
-        console.log("here");
         $scope.$root.$broadcast("getUser");
     };
     $scope.eventTypeArray=[];
@@ -116,6 +115,7 @@ app.controller("profile",function($scope,$compile,$http){
         $scope.getUser();
     });
     $scope.getUser=function(){
+        console.log("here");
         $http.get("user/getUser")
         .then(function success(response){
             response=response.data;
