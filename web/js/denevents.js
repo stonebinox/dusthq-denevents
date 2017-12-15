@@ -173,7 +173,13 @@ app.controller("event",function($scope,$http,$compile){
                             if(validate(eEnd)){
                                $("#eend").parent().removeClass("has-error");
                                 var img=document.eventcreate.eventimg.files[0];
-                                console.log(img);
+                                if(validate(img)){
+                                    $("#eventimg").parent().removeClass("has-error");
+
+                                }
+                                else{
+                                    $("#eventimg").parent().addClass("has-error");
+                                }
                             }
                             else{
                                 $("#eend").parent().addClass("has-error");
@@ -204,5 +210,18 @@ app.controller("event",function($scope,$http,$compile){
             $("#title").parent().addClass("has-error");
             $("#title").focus();
         }
+    };
+    $scope.loadImagePreview=function(){
+        var image=document.eventcreate.eventimg.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imgpreview').css({
+                "background":"#ffffff url("+e.target.result+") center",
+                "-webkit-background-size":"cover",
+                "-moz-background-size":"cover",
+                "background-size":"cover"
+            }); 
+        };
+        reader.readAsDataURL(image);
     };
 });
