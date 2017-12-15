@@ -175,7 +175,23 @@ app.controller("event",function($scope,$http,$compile){
                                 var img=document.eventcreate.eventimg.files[0];
                                 if(validate(img)){
                                     $("#eventimg").parent().removeClass("has-error");
-
+                                    var eDesc=$.trim($("#edesc").val());
+                                    if(validate(eDesc)){
+                                        $("#edesc").parent().removeClass("has-error");
+                                        var orgName=$.trim($("#organizer").val());
+                                        if(validate($orgName)){
+                                            $("#organizer").parent().removeClass("has-error");
+                                            console.log("done");
+                                        }
+                                        else{
+                                            $("#organizer").parent().addClass("has-error");
+                                            $("#organizer").focus();
+                                        }
+                                    }
+                                    else{
+                                        $("#edesc").parent().addClass("has-error");
+                                        $("#edesc").focus();
+                                    }
                                 }
                                 else{
                                     $("#eventimg").parent().addClass("has-error");
@@ -213,7 +229,6 @@ app.controller("event",function($scope,$http,$compile){
     };
 });
 function loadImagePreview(){
-    console.log("here");
     var image=document.eventcreate.eventimg.files[0];
     if(validate(image)){
         var reader = new FileReader();
