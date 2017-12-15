@@ -212,6 +212,7 @@ app.controller("event",function($scope,$http,$compile){
         }
     };
     $scope.loadImagePreview=function(){
+        console.log("here");
         var image=document.eventcreate.eventimg.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
