@@ -214,15 +214,17 @@ app.controller("event",function($scope,$http,$compile){
     $scope.loadImagePreview=function(){
         console.log("here");
         var image=document.eventcreate.eventimg.files[0];
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#imgpreview').css({
-                "background":"#ffffff url("+e.target.result+") center",
-                "-webkit-background-size":"cover",
-                "-moz-background-size":"cover",
-                "background-size":"cover"
-            }); 
-        };
-        reader.readAsDataURL(image);
+        if(validate(image)){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imgpreview').css({
+                    "background":"#ffffff url("+e.target.result+") center",
+                    "-webkit-background-size":"cover",
+                    "-moz-background-size":"cover",
+                    "background-size":"cover"
+                }); 
+            };
+            reader.readAsDataURL(image);
+        }
     };
 });
