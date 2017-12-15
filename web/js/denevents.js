@@ -181,7 +181,22 @@ app.controller("event",function($scope,$http,$compile){
                                         var orgName=$.trim($("#organizer").val());
                                         if(validate(orgName)){
                                             $("#organizer").parent().removeClass("has-error");
-                                            document.eventcreate.submit();
+                                            var eventTypeID=$("#eventtype").val();
+                                            if((validate(eventTypeID))&&(eventTypeID!=-1)){
+                                                var eventTopic=$("#eventtopic").val();
+                                                if((validate(eventTopic))&&(eventTopic!=-1)){
+                                                    // document.eventcreate.submit();
+                                                    console.log("here");
+                                                }
+                                                else{
+                                                    $("#eventtopic").parent().addClass("has-error");
+                                                    $("#eventtopic").focus();    
+                                                }
+                                            }
+                                            else{
+                                                $("#eventtype").parent().addClass("has-error");
+                                                $("#eventtype").focus();
+                                            }
                                         }
                                         else{
                                             $("#organizer").parent().addClass("has-error");

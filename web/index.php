@@ -1,12 +1,29 @@
 <?php
-
 ini_set('display_errors', 1);
+function validate($object)
+{
+    if(($object!="")&&($object!=NULL))
+    {
+        return true;
+    }
+    return false;
+}
+function secure($string)
+{
+    return addslashes(htmlentities($string));
+}
 require_once __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../src/app.php';
 require __DIR__.'/../config/prod.php';
 require __DIR__.'/../src/controllers.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+$s3Client = new S3Client([
+    'region' => 'us-east-2',
+    'version' => 'latest'
+]);
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => 'php://stderr',
 ));
@@ -168,13 +185,15 @@ $app->get("/createEvent",function() use($app){
     }
 });
 $app->post("/events/createEvent",function(Request $request){
-    if(($request->get("title"))&&($request->get("edesc")))
+    if(($request->get("title"))&&($request->get("eventType")))
     {
         require("../classes/adminMaster.php");
         require("../classes/userMaster.php");
         require("../classes/eventTypeMaster.php");
         require("../classes/eventMaster.php");
-        
+        $event=new eventMaster;
+        $response=$event->createEvent($app['session']->get("uid"),$request->get("title"),$request->get("address"),$request->get("city"),$request->get("zip"),$request->get("estart"),$request->get("eend"),$request->get("eventimg"),$request->get("desc"),$request->get("organizer"),$request->get("eventtype"),$request->get("eventtopic"),$request->get("privacy"));
+        return $response;
     }
     else
     {

@@ -155,5 +155,118 @@ class eventMaster extends eventTypeMaster
             return "INVALID_OFFSET_VALUE";
         }
     }
+    function createEvent($userID,$title,$address,$city,$zip,$eStart,$eEnd,$image,$description,$orgName,$eventTypeID,$eventTopic,$privacy=0)
+    {
+        $userID=secure($userID);
+        userMaster::__construct($userID);
+        if($this->userValid)
+        {
+            $title=trim(secure($title));
+            if(($title!="")&&($title!=NULL))
+            {
+                $address=trim(secure($address));
+                if(validate($address))
+                {
+                    $city=trim(secure($city));
+                    if(validate($city))
+                    {
+                        $zip=trim(secure($zip));
+                        if(validate($zip))
+                        {
+                            $eStart=trim(secure($eStart));
+                            if(validate($eStart))
+                            {
+                                $eEnd=trim(secure($eEnd));
+                                if(validate($eEnd))
+                                {
+                                    if(validate($image))
+                                    {
+                                        $description=trim(secure($description));
+                                        if(validate($description))
+                                        {
+                                            $orgName=trim(secure($orgName));
+                                            if(validate($orgName))
+                                            {
+                                                $eventTypeID=secure($eventTypeID);
+                                                eventTypeMaster::__construct($eventTypeID);
+                                                if($this->eventTypeValid)
+                                                {
+                                                    $eventTopic=trim(secure($eventTopic));
+                                                    if(validate($eventTopic))
+                                                    {
+                                                        $s3Client=$GLOBALS['s3Client'];
+                                                        $file=$image->getRealPath();
+                                                        $itemName=addslashes(htmlentities($image->getClientOriginalName()));
+                                                        try{
+                                                            $result = $s3Client->putObject([
+                                                                'ACL'        => 'public-read',
+                                                                'Bucket'     => "denevents",
+                                                                'Key'        => $itemName,
+                                                                'SourceFile' => $file,
+                                                            ]);
+                                                        } catch (Exception $e) {
+                                                            return $e->getMessage();
+                                                        }
+                                                        $path=$result->get('ObjectURL');
+                                                        $in="INSERT INTO event_master (timestamp,user_master_iduser_master,event_name,event_description,event_image,event_type_master_idevent_type_master,event_start,event_end,event_organizer,event_address,event_city,event_privacy,event_topic,stat) VALUES (NOW(),'$userID','$title','$desc','$path','$eventTypeID','$eStart','$eEnd','$orgName','$address','$city','$privacy','$eventTopic','2')";
+                                                        $in=$app['db']->executeQuery($in);
+                                                        return "EVENT_ADDED";
+                                                    }
+                                                    else
+                                                    {
+                                                        return "INVALID_EVENT_TOPIC";
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    return "INVALID_EVENT_TYPE_ID";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                return "INVALID_EVENT_ORGANIZER";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            return "INVALID_EVENT_DESCRIPTION";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        return "INVALID_EVENT_IMAGE";
+                                    }
+                                }
+                                else
+                                {
+                                    return "INVALID_EVENT_END_DATE";
+                                }
+                            }
+                            else
+                            {
+                                return "INVALID_EVENT_START_DATE";
+                            }
+                        }
+                        else
+                        {
+                            return "INVALID_EVENT_ZIP";
+                        }
+                    }
+                    else
+                    {
+                        return "INVALID_EVENT_CITY";
+                    }
+                }
+                else
+                {
+                    return "INVALID_EVENT_ADDRESS";
+                }
+            }
+            else
+            {
+                return "INVALID_EVENT_TITLE";
+            }
+        }
+    }
 }
 ?>
