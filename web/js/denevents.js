@@ -185,8 +185,7 @@ app.controller("event",function($scope,$http,$compile){
                                             if((validate(eventTypeID))&&(eventTypeID!=-1)){
                                                 var eventTopic=$("#eventtopic").val();
                                                 if((validate(eventTopic))&&(eventTopic!=-1)){
-                                                    // document.eventcreate.submit();
-                                                    console.log("here");
+                                                    document.eventcreate.submit();
                                                 }
                                                 else{
                                                     $("#eventtopic").parent().addClass("has-error");
