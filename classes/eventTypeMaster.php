@@ -72,7 +72,7 @@ class eventTypeMaster extends userMaster
         $eventTypeArray=array();
         for($i=0;$i<count($etm);$i++)
         {
-            $eventTypeRow=$eventTypeArray[$i];
+            $eventTypeRow=$etm[$i];
             $eventTypeID=$eventTypeRow['idevent_type_master'];
             $this->__construct($eventTypeID);
             $eventType=$this->getEventType();
