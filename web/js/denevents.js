@@ -112,10 +112,10 @@ app.controller("home",function($scope,$compile,$http){
 app.controller("profile",function($scope,$compile,$http){
     $scope.userArray=[];
     $scope.$on("getUser",function(){
+        console.log("here");
         $scope.getUser();
     });
     $scope.getUser=function(){
-        console.log("here");
         $http.get("user/getUser")
         .then(function success(response){
             response=response.data;
