@@ -72,7 +72,7 @@ $app->post("/login_action",function(Request $request) use($app){
         $auth=$user->authenticateUser($request->get("email"),$request->get("password"));
         if($auth=="AUTHENTICATE_USER")
         {
-            return $app->redirect("/profile");
+            return $app->redirect("/");
         }
         else
         {
