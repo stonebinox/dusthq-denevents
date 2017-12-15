@@ -231,6 +231,7 @@ app.controller("event",function($scope,$http,$compile){
         $http.get("events/getEventTypes")
         .then(function success(response){
             response=response.data;
+            console.log(response);
             if(typeof response=="object"){
                 var eventTypes=response;
                 var text='<select name="eventtype" id="eventtype" class="form-control"><option value="-1">Select ...</option>';
