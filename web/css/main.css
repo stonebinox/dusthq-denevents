@@ -16,9 +16,12 @@ h1{
     height:350px;
 }
 #imgpreview{
+    margin-top:10px;
+    border:1px solid #cccccc;
+    box-shadow:0px 0px 2px #888888;
     width:100%;
     height:250px;
-    background: url(../images/no-image.png) no-repeat center;
+    background: #ffffff url(../images/no-image.png) no-repeat center;
     -webkit-background-size:contain;
     -moz-background-size:contain;
     background-size:contain;

@@ -172,18 +172,22 @@ app.controller("event",function($scope,$http,$compile){
                     }
                     else{
                         $("#zip").parent().addClass("has-error");
+                        $("#zip").focus();
                     }
                 }
                 else{
                     $("#city").parent().addClass("has-error");
+                    $("#city").focus();
                 }
             }
             else{
                 $("#address").parent().addClass("has-error");
+                $("#address").focus();
             }
         }
         else{
             $("#title").parent().addClass("has-error");
+            $("#title").focus();
         }
     };
 });
