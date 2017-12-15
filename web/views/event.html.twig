@@ -77,6 +77,38 @@
                 <label for="organizer">Organizer name</label>
                 <input type="text" name="organizer" id="organizer" class="form-control" placeholder="Who's organizer this event?">
             </div>
+            <div class="form-group" ng-init="getEventTypes()">
+                <label for="eventtype">Event type</label>
+                <div id="eventtypes"></div>
+            </div>
+            <div class="form-group">
+                <label for="eventtopic">Event topic</label>
+                <select name="eventtopic" id="eventtopic" class="form-control">
+                    <option value="-1">Select ...</option>
+                    <option value="" selected="selected">Select a topic</option>
+                    <option value="Auto, Boat and Air">Auto, Boat and Air</option>
+                    <option value="Business and Professional">Business and Professional</option>
+                    <option value="Charity and Causes">Charity and Causes</option>
+                    <option value="Community and Culture">Community and Culture</option>
+                    <option value="Family and Education">Family and Education</option>
+                    <option value="Fashion and Beauty">Fashion and Beauty</option>
+                    <option value="Film, Media and Entertainment">Film, Media and Entertainment</option>
+                    <option value="Food and Drink">Food and Drink</option>
+                    <option value="Government and Politics">Government and Politics</option>
+                    <option value="Health and Wellness">Health and Wellness</option>
+                    <option value="Hobbies and Special Interest">Hobbies and Special Interest</option>
+                    <option value="Home and Lifestyle">Home and Lifestyle</option>
+                    <option value="Music">Music</option>
+                    <option value="Other">Other</option>
+                    <option value="Performing and Visual Arts">Performing and Visual Arts</option>
+                    <option value="Religion and Spirituality">Religion and Spirituality</option>
+                    <option value="School Activities">School Activities</option>
+                    <option value="Science and Technology">Science and Technology</option>
+                    <option value="Seasonal and Holiday">Seasonal and Holiday</option>
+                    <option value="Sports and Fitness">Sports and Fitness</option>
+                    <option value="Travel and Outdoor">Travel and Outdoor</option>
+                </select>
+            </div>
             <div class="text-center">
                 <button type="button" class="btn btn-primary btn-lg" ng-click="validateEvent()">Create tickets <span class="glyphicon glyphicon-chevron-right"></span></button>
             </div>

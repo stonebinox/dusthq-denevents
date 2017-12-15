@@ -167,5 +167,19 @@ $app->get("/createEvent",function() use($app){
         return $app->redirect("/login");
     }
 });
+$app->post("/events/createEvent",function(Request $request){
+    if(($request->get("title"))&&($request->get("edesc")))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        
+    }
+    else
+    {
+        return $app->redirect("/createEvent?err=INVALID_PARAMETERS");
+    }
+});
 $app->run();
 ?>

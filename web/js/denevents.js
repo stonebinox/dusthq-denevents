@@ -181,7 +181,7 @@ app.controller("event",function($scope,$http,$compile){
                                         var orgName=$.trim($("#organizer").val());
                                         if(validate(orgName)){
                                             $("#organizer").parent().removeClass("has-error");
-                                            console.log("done");
+                                            document.eventcreate.submit();
                                         }
                                         else{
                                             $("#organizer").parent().addClass("has-error");
@@ -226,6 +226,40 @@ app.controller("event",function($scope,$http,$compile){
             $("#title").parent().addClass("has-error");
             $("#title").focus();
         }
+    };
+    $scope.getEventTypes=function(){
+        $http.get("events/getEvents")
+        .then(function success(response){
+            response=response.data;
+            if(typeof response=="object"){
+                var eventTypes=response;
+                var text='<select name="eventtype" id="eventtype" class="form-control"><option value="-1">Select ...</option>';
+                for(var i=0;i<eventTypes.length;i++){
+                    var eventType=eventTypes[i];
+                    var eventTypeID=eventType.idevent_type_master;
+                    var eventTypeName=stripslashes(eventType.type_name);
+                    text+='<option value="'+eventTypeID+'">'+eventTypeName+'</option>';
+                }
+                text+='</select>';
+                $("#eventtypes").html(text);
+            }
+            else{
+                response=$.trim(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while getting event types. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "NO_EVENT_TYPES_FOUND":
+                    $("#eventtypes").html('No event types found.');
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while getting event types. Please try again later.");
+        });
     };
 });
 function loadImagePreview(){
