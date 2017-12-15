@@ -167,8 +167,23 @@ app.controller("event",function($scope,$http,$compile){
                     if(validate(zip)){
                         $("#zip").parent().removeClass("has-error");
                         var eStart=$("#estart").val();
-                        var eEnd=$("#eend").val();
-                        console.log(eStart,eEnd);
+                        if(validate(eStart)){
+                            $("#estart").parent().removeClass("has-error");
+                            var eEnd=$("#eend").val();
+                            if(validate(eEnd)){
+                               $("#eend").parent().removeClass("has-error");
+                                var img=$("#eventimg").files[0];
+                                console.log(img);
+                            }
+                            else{
+                                $("#eend").parent().addClass("has-error");
+                                $("#eend").focus();
+                            }
+                        }
+                        else{
+                            $("#estart").parent().addClass("has-error");
+                            $("#estart").focus();
+                        }
                     }
                     else{
                         $("#zip").parent().addClass("has-error");
