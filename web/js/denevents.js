@@ -179,7 +179,7 @@ app.controller("event",function($scope,$http,$compile){
                                     if(validate(eDesc)){
                                         $("#edesc").parent().removeClass("has-error");
                                         var orgName=$.trim($("#organizer").val());
-                                        if(validate($orgName)){
+                                        if(validate(orgName)){
                                             $("#organizer").parent().removeClass("has-error");
                                             console.log("done");
                                         }
