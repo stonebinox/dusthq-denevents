@@ -56,6 +56,30 @@
                 <label for="zip">Zip</label>
                 <input type="number" class="form-control" name="zip" id="zip" placeholder="Valid Denmark zip">
             </div>
+            <div class="form-group">
+                <label for="estart">Event start</label>
+                <input type="datetime" name="estart" id="estart" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="eend">Event end</label>
+                <input type="datetime" name="eend" id="eend" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="eventimg">Event image</label>
+                <input type="file" class="form-control" name="eventimg" id="eventimg" accept="image/*">
+                <div id="imgpreview"></div>
+            </div>
+            <div class="form-group">
+                <label for="edesc">Event description</label>
+                <textarea name="edesc" id="edesc" placeholder="Enter a compelling description for your event" class="form-control" rows=10>
+            </div>
+            <div class="form-group">
+                <label for="organizer">Organizer name</label>
+                <input type="text" name="organizer" id="organizer" class="form-control" placeholder="Who's organizer this event?">
+            </div>
+            <div class="text-center">
+                <button type="button" class="btn btn-primary btn-lg">Create tickets <span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
         </form>
     </div>
     <div class="container-fluid">
