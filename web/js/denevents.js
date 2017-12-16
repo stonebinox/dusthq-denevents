@@ -100,7 +100,7 @@ app.controller("home",function($scope,$compile,$http){
                     $scope.heroPosition=0;
                 }
                 setTimeout(function(){
-                    $scope.heroPosition();
+                    $scope.startHeroEvent();
                 },5000);
             }
         }
