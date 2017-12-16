@@ -73,7 +73,7 @@ app.controller("home",function($scope,$compile,$http){
                 var eventType=eventTypes[i];
                 var eventTypeID=eventType.idevent_type_master;
                 var typeName=stripslashes(eventType.type_name);
-                text+='<div class="col-sm-4"><div style="width:100%;height:150px;overflow:none;background:#000000;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;"><br><h2 class="text-center">'+typeName+'</h2></div></div>';
+                text+='<div class="col-sm-4"><div style="width:100%;height:150px;overflow:none;background:#000000;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;"><h2 class="text-center" style="margin-top:20px;">'+typeName+'</h2></div></div>';
             }
             text+='</div>';
             $("#categorylist").html(text);
