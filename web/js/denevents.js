@@ -95,7 +95,7 @@ app.controller("home",function($scope,$compile,$http){
                     "-moz-background-size":"cover",
                     "background-size":"cover"
                 });
-                var text='<div class="row"><div class="col-sm-6 col-sm-offset-2"><div class="well"><h2 class="text-left">'+eventName+'</h2></div></div></div>';
+                var text='<br><br><div class="row"><div class="col-sm-6 col-sm-offset-1"><h2 class="text-left">'+eventName+'</h2></div></div>';
                 $("#hero-event").html(text);
                 $scope.heroPosition+=1;
                 if($scope.heroPosition>=$scope.eventsArray.length){
