@@ -96,7 +96,7 @@ app.controller("home",function($scope,$compile,$http){
                     "-moz-background-size":"cover",
                     "background-size":"cover"
                 });
-                var text='<div class="row" styyle="margin-top:100px;"><div class="col-sm-6 col-sm-offset-1"><h2 class="text-left">'+eventName+'</h2>';
+                var text='<div class="row" style="margin-top:100px;"><div class="col-sm-6 col-sm-offset-1"><h2 class="text-left">'+eventName+'</h2>';
                 if(stat==1){
                     text+='<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
                 }
