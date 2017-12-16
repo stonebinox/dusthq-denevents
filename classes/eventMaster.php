@@ -157,6 +157,7 @@ class eventMaster extends eventTypeMaster
     }
     function createEvent($userID,$title,$address,$city,$zip,$eStart,$eEnd,$image,$description,$orgName,$eventTypeID,$eventTopic,$privacy=0)
     {
+        $app=$this->app;
         $userID=secure($userID);
         userMaster::__construct($userID);
         if($this->userValid)
