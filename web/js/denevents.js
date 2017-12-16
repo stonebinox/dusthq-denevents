@@ -16,7 +16,7 @@ app.controller("home",function($scope,$compile,$http){
             console.log(response);
             if(typeof response=="object"){
                 $scope.eventsArray=response;
-                // $scope.displayEvents();
+                $scope.displayEvents();
                 $scope.startHeroEvent();
             }
             else{
@@ -37,6 +37,24 @@ app.controller("home",function($scope,$compile,$http){
             console.log(response);
             messageBox("Problem","Something went wrong while loading events on this page. Please try again later.");
         });
+    };
+    $scope.displayEvents=function(){
+        if(validate($scope.eventsArray)){
+            var events=$scope.eventsArray;
+            var text='<div class="row">';
+            for(var i=0;i<events.length;i++){
+                var event=events[i];
+                var eventID=event.idevent_master;
+                var eventName=event.event_name;
+                var stat=event.stat;
+                var eventType=event.event_type_master_idevent_type_master;
+                var typeName=eventType.type_name;
+                var eventImage=event.event_image;
+                text+='<div class="col-md-4"><div class="thumbnail"><a href="event/'+eventID+'"><img src="'+eventImage+'" alt="'+eventName+'" style="width:100%"><div class="caption"><p>'+eventName+'</p></div></a></div>';
+            }
+            text+='</div>';
+            $("#eventlist").html(text);
+        }
     };
     $scope.getEventTypes=function(){
         $http.get("events/getEventTypes")
