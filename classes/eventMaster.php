@@ -209,7 +209,10 @@ class eventMaster extends eventTypeMaster
                                                     $path=$result->get('ObjectURL');
                                                     $in="INSERT INTO event_master (timestamp,user_master_iduser_master,event_name,event_description,event_image,event_type_master_idevent_type_master,event_start,event_end,event_organizer,event_address,event_city,event_privacy,event_topic,stat) VALUES (NOW(),'$userID','$title','$desc','$path','$eventTypeID','$eStart','$eEnd','$orgName','$address','$city','$privacy','$eventTopic','2')";
                                                     $in=$app['db']->executeQuery($in);
-                                                    return "EVENT_ADDED";
+                                                    $em="SELECT idevent_master FROM event_master WHERE stat='2' AND user_master_iduser_master='$userID' ORDER BY idevent_master DESC LIMIT 1";
+                                                    $em=$app['db']->fetchAssoc($em);
+                                                    $eventID=$em['idevent_master'];
+                                                    return "EVENT_ADDED_".$eventID;
                                                 }
                                                 else
                                                 {

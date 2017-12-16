@@ -194,8 +194,10 @@ $app->post("/events/createEvent",function(Request $request) use($app){
         $event=new eventMaster;
         $response=$event->createEvent($app['session']->get("uid"),$request->get("title"),$request->get("address"),$request->get("city"),$request->get("zip"),$request->get("estart"),$request->get("eend"),$request->files->get("eventimg"),$request->get("edesc"),$request->get("organizer"),$request->get("eventtype"),$request->get("eventtopic"),$request->get("privacy"));
         return $response;
-        if($response=="EVENT_ADDED"){
-            return $app->redirect("/createTickets");
+        if(strpos($response,"EVENT_ADDED")!==false){
+            $e=explode("EVENT_ADDED_",$response);
+            $eventID=trim($e[1]);
+            return $app->redirect("/createTickets?event_id=".$eventID);
         }
         else{
             return $app->redirect("/createEvent?err=".$response);
