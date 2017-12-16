@@ -67,7 +67,16 @@ app.controller("home",function($scope,$compile,$http){
     }; 
     $scope.displayEventTypes=function(){
         if(validate($scope.eventTypeArray)){
-
+            var eventTypes=$scope.eventTypeArray;
+            var text='<div class="row">';
+            for(var i=0;i<eventTypes.length;i++){
+                var eventType=eventTypes[i];
+                var eventTypeID=eventType.idevent_type_master;
+                var typeName=stripslashes(eventType.type_name);
+                text+='<div class="col-sm-4"><div style="width:100%;height:150px;background:#000000;"><h2 class="text-center">'+typeName+'</h1></div></div>';
+            }
+            text+='</div>';
+            $("#categorylist").html(text);
         }
     };
     $scope.startHeroEvent=function(){
