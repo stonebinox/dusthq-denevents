@@ -195,7 +195,7 @@ $app->post("/events/createEvent",function(Request $request) use($app){
         $response=$event->createEvent($app['session']->get("uid"),$request->get("title"),$request->get("address"),$request->get("city"),$request->get("zip"),$request->get("estart"),$request->get("eend"),$request->files->get("eventimg"),$request->get("edesc"),$request->get("organizer"),$request->get("eventtype"),$request->get("eventtopic"),$request->get("privacy"));
         return $response;
         if($response=="EVENT_ADDED"){
-            return $response;
+            return $app->redirect("/createTickets");
         }
         else{
             return $app->redirect("/createEvent?err=".$response);
@@ -204,6 +204,16 @@ $app->post("/events/createEvent",function(Request $request) use($app){
     else
     {
         return $app->redirect("/createEvent?err=INVALID_PARAMETERS");
+    }
+});
+$app->get("/createTickets",function(Request $request) use($app){
+    if(($app['session']->get("uid"))&&($request->get("event_id")))
+    {
+        return $app['twig']->render("tickets.html.twig");
+    }
+    else
+    {
+        return $app->redirect("/login");
     }
 });
 $app->run();

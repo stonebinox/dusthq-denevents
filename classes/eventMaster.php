@@ -121,7 +121,7 @@ class eventMaster extends eventTypeMaster
                     return "INVALID_USER_ID";
                 }
             }
-            $em="SELECT idevent_master FROM event_master WHERE stat='1' ";
+            $em="SELECT idevent_master FROM event_master WHERE stat!='0' ";
             if($eventTypeID!=NULL)
             {
                 $em.="AND event_type_master_idevent_type_master='$eventTypeID' ";
