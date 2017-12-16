@@ -197,7 +197,7 @@ class eventMaster extends eventTypeMaster
                                                     {
                                                         $s3Client=$GLOBALS['s3Client'];
                                                         $file=$image->getRealPath();
-                                                        $itemName=addslashes(htmlentities($image->getClientOriginalName()));
+                                                        $itemName=secure($image->getClientOriginalName());
                                                         try{
                                                             $result = $s3Client->putObject([
                                                                 'ACL'        => 'public-read',
