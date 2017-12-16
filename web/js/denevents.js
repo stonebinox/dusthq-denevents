@@ -75,6 +75,7 @@ app.controller("home",function($scope,$compile,$http){
             var events=$scope.eventsArray;
             if(validate(events[$scope.heroPosition])){
                 var event=events[$scope.heroPosition];
+                var stat=event.stat;
                 var eventID=event.idevent_master;
                 var eventName=stripslashes(event.event_name);
                 var eventDesc=stripslashes(event.event_description);
@@ -95,7 +96,14 @@ app.controller("home",function($scope,$compile,$http){
                     "-moz-background-size":"cover",
                     "background-size":"cover"
                 });
-                var text='<br><br><div class="row"><div class="col-sm-6 col-sm-offset-1"><h2 class="text-left">'+eventName+'</h2></div></div>';
+                var text='<br><br><div class="row"><div class="col-sm-6 col-sm-offset-1"><h2 class="text-left">'+eventName+'</h2>';
+                if(stat==1){
+                    text+='<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
+                }
+                else{
+                    text+='<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
+                }
+                text+='</div></div>';
                 $("#hero-event").html(text);
                 $scope.heroPosition+=1;
                 if($scope.heroPosition>=$scope.eventsArray.length){
