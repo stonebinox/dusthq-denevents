@@ -99,9 +99,11 @@ app.controller("home",function($scope,$compile,$http){
                 if($scope.heroPosition>=$scope.eventsArray.length){
                     $scope.heroPosition=0;
                 }
+                var nextImage=new Image();
+                nextImage.src=events[$scope.heroPosition].event_image;
                 setTimeout(function(){
                     $scope.startHeroEvent();
-                },5000);
+                },10000);
             }
         }
     }; 
