@@ -26,7 +26,7 @@ class eventMaster extends eventTypeMaster
         {
             $app=$this->app;
             $eventID=$this->event_id;
-            $em="SELECT event_type_master_idevent_type_master,user_master_iduser_master FROM event_master WHERE stat='1' AND idevent_master='$eventID'";
+            $em="SELECT event_type_master_idevent_type_master,user_master_iduser_master FROM event_master WHERE stat!='0' AND idevent_master='$eventID'";
             $em=$app['db']->fetchAssoc($em);
             if(($em!="")&&($em!=NULL))
             {
