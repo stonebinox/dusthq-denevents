@@ -50,7 +50,7 @@ app.controller("home",function($scope,$compile,$http){
                 var eventType=event.event_type_master_idevent_type_master;
                 var typeName=eventType.type_name;
                 var eventImage=event.event_image;
-                text+='<div class="col-md-4"><div class="thumbnail"><a href="event/'+eventID+'"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p>'+eventName+'</p></div></a></div></div>';
+                text+='<div class="col-md-4"><div class="thumbnail"><a href="event/'+eventID+'"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong></p></div></a></div></div>';
             }
             text+='</div>';
             $("#eventlist").html(text);
