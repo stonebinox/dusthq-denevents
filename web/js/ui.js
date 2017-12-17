@@ -122,6 +122,9 @@ function readParams(){
 			case "ACCOUNT_ALREADY_EXISTS":
 			err='Account already exists. <a href="https://dusthq-dadafund.herokuapp.com/">Login</a> to your account.';
 			break;
+			case "TICKET_TYPE_ALREADY_ADDED":
+			err="This ticket type has already been added.";
+			break;
 		}
 		$("#message").html('<div class="alert alert-danger"><strong>Error</strong> '+err+'</div>');
 	}
