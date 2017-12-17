@@ -74,7 +74,7 @@ class ticketMaster extends eventMaster
                             $tm=$app['db']->fetchAssoc($tm);
                             if(!validate($tm))
                             {
-                                $in="INSERT INTO ticket_master (timestamp,event_master_idevent_master,ticket_count,ticket_type,ticket_cost) VALUES (NOW(),'$eventID','$ticketCount','$ticketType','$ticketCost')";
+                                $in="INSERT INTO ticket_master (timestamp,event_master_idevent_master,ticket_count,ticket_type,ticket_cost,ticket_name) VALUES (NOW(),'$eventID','$ticketCount','$ticketType','$ticketCost','$ticketName')";
                                 $in=$app['db']->executeQuery($in);
                                 return "TICKET_ADDED";
                             }
