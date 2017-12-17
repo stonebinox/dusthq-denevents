@@ -449,7 +449,7 @@ app.controller("event",function($scope,$http,$compile){
             } 
             else{
                 response=$.trim(response);
-                switch(respomse){
+                switch(response){
                     case "INVALID_PARAMETERS":
                     default:
                     messageBox("Problem","Something went wrong while trying to load ticket information. Please try again later. This is the error we see: "+response);
