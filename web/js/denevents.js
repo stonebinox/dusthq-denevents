@@ -95,7 +95,7 @@ app.controller("home",function($scope,$compile,$http){
                 if(!validate(typeImage)){
                     typeImage='images/no-image.png';
                 }
-                text+='<div class="col-sm-4"><div style="width:100%;height:150px;overflow:none;background:#ffffff url('+typeImage+') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer;border:1px solid #cccccc;box-shadow:0px 0px 2px #888888;"><h2 class="text-center" style="position:relative;top:30px;">'+typeName+'</h2></div></div>';
+                text+='<div class="col-sm-4"><div style="width:100%;height:150px;overflow:none;background:#ffffff url('+typeImage+') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer;"><h2 class="text-center" style="position:relative;top:60px;">'+typeName+'</h2></div></div>';
             }
             text+='</div>';
             $("#categorylist").html(text);
