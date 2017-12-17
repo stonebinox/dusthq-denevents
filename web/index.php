@@ -196,7 +196,7 @@ $app->post("/events/createEvent",function(Request $request) use($app){
         if(strpos($response,"EVENT_ADDED")!==false){
             $e=explode("EVENT_ADDED_",$response);
             $eventID=trim($e[1]);
-            return $app->redirect("/createTickets?event_id=".$eventID);
+            return $app->redirect("/createTickets/".$eventID);
         }
         else{
             return $app->redirect("/createEvent?err=".$response);
@@ -207,14 +207,39 @@ $app->post("/events/createEvent",function(Request $request) use($app){
         return $app->redirect("/createEvent?err=INVALID_PARAMETERS");
     }
 });
-$app->get("/createTickets",function(Request $request) use($app){
-    if(($app['session']->get("uid"))&&($request->get("event_id")))
+$app->get("/createTickets/{eventID}",function($eventID) use($app){
+    if($app['session']->get("uid"))
     {
+        $app['session']->set("event_id",$eventID);
         return $app['twig']->render("tickets.html.twig");
     }
     else
     {
         return $app->redirect("/login");
+    }
+});
+$app->post("/events/createTickets",function(Request $request) use($app){
+    if(($app['session']->get("event_id"))&&($request->get("tname")))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        require("../classes/ticketMaster.php");
+        $ticket=new ticketMaster;
+        $response=$ticket->addTicket($app['session']->get("event_id"),$request->get("quan"),1,$request->get("price"));
+        if($response=="TICKET_ADDED")
+        {
+            return $app->redirect("/dashboard?suc=EVENT_ADDED");
+        }
+        else
+        {
+            return $app->redirect("/createTickets/".$app['session']->get("event_id")."?err=".$response);
+        }
+    }
+    else
+    {
+        return $app->redirect("/createTickets/".$app['session']->get("event_id")."?err=INVALID_PARAMETERS");
     }
 });
 $app->run();
