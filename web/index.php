@@ -242,7 +242,7 @@ $app->post("/events/addTickets",function(Request $request) use($app){
         require("../classes/eventMaster.php");
         require("../classes/ticketMaster.php");
         $ticket=new ticketMaster;
-        $response=$ticket->addTicket($app['session']->get("event_id"),$request->get("quan"),1,$request->get("price"));
+        $response=$ticket->addTicket($app['session']->get("event_id"),$request->get("tname"),$request->get("quan"),1,$request->get("price"));
         if($response=="TICKET_ADDED")
         {
             return $app->redirect("/createTickets/".$app['session']->get("event_id")."?suc=TICKETS_ADDED");

@@ -51,48 +51,56 @@ class ticketMaster extends eventMaster
             return false;
         }
     }
-    function addTicket($eventID,$ticketCount,$ticketType,$ticketCost=0)
+    function addTicket($eventID,$ticketName,$ticketCount,$ticketType,$ticketCost=0)
     {
         $app=$this->app;
         $eventID=secure($eventID);
         eventMaster::__construct($eventID);
         if($this->eventValid)
         {
-            $ticketCount=trim(secure($ticketCount));
-            if((validate($ticketCount))&&(is_numeric($ticketCount))&&($ticketCount>0))
+            $ticketName=trim(secure($ticketName));
+            if(validate($ticketName))
             {
-                $ticketType=secure($ticketType);
-                if(($ticketType==1)||($ticketType==2))
+                $ticketCount=trim(secure($ticketCount));
+                if((validate($ticketCount))&&(is_numeric($ticketCount))&&($ticketCount>0))
                 {
-                    $ticketCost=secure($ticketCost);
-                    if((validate($ticketCost))&&(is_numeric($ticketCost))&&($ticketCost>=0))
+                    $ticketType=secure($ticketType);
+                    if(($ticketType==1)||($ticketType==2))
                     {
-                        $tm="SELECT idticket_master FROM ticket_master WHERE stat='1' AND event_master_idevent_master='$eventID' AND ticket_type='$ticketType'";
-                        $tm=$app['db']->fetchAssoc($tm);
-                        if(!validate($tm))
+                        $ticketCost=secure($ticketCost);
+                        if((validate($ticketCost))&&(is_numeric($ticketCost))&&($ticketCost>=0))
                         {
-                            $in="INSERT INTO ticket_master (timestamp,event_master_idevent_master,ticket_count,ticket_type,ticket_cost) VALUES (NOW(),'$eventID','$ticketCount','$ticketType','$ticketCost')";
-                            $in=$app['db']->executeQuery($in);
-                            return "TICKET_ADDED";
+                            $tm="SELECT idticket_master FROM ticket_master WHERE stat='1' AND event_master_idevent_master='$eventID' AND ticket_type='$ticketType'";
+                            $tm=$app['db']->fetchAssoc($tm);
+                            if(!validate($tm))
+                            {
+                                $in="INSERT INTO ticket_master (timestamp,event_master_idevent_master,ticket_count,ticket_type,ticket_cost) VALUES (NOW(),'$eventID','$ticketCount','$ticketType','$ticketCost')";
+                                $in=$app['db']->executeQuery($in);
+                                return "TICKET_ADDED";
+                            }
+                            else
+                            {
+                                return "TICKET_TYPE_ALREADY_ADDED";
+                            }
                         }
                         else
                         {
-                            return "TICKET_TYPE_ALREADY_ADDED";
+                            return "INVALID_TICKET_COST";
                         }
                     }
                     else
                     {
-                        return "INVALID_TICKET_COST";
+                        return "INVALID_TICKET_TYPE";
                     }
                 }
                 else
                 {
-                    return "INVALID_TICKET_TYPE";
+                    return "INVALID_TICKET_COUNT";
                 }
             }
             else
             {
-                return "INVALID_TICKET_COUNT";
+                return "INVALID_TICKET_NAME";
             }
         }
         else
