@@ -292,5 +292,25 @@ $app->get("/event/{eventID}",function($eventID) use($app){
     $app['session']->set("event_id",$eventID);
     return $app['twig']->render("eventview.html.twig");
 });
+$app->get("/event/getEvent",function() use($app){
+    if($app['session']->get("event_id"))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        $event=new eventMaster($app['session']->get("event_id"));
+        $eventData=$event->getEvent();
+        if(is_array($eventData))
+        {
+            return json_encode($eventData);
+        }
+        return $eventData;
+    }
+    else
+    {
+        return "INVALID_PARAMETERS";
+    }
+});
 $app->run();
 ?>
