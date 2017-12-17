@@ -193,7 +193,6 @@ $app->post("/events/createEvent",function(Request $request) use($app){
         require("../classes/eventMaster.php");
         $event=new eventMaster;
         $response=$event->createEvent($app['session']->get("uid"),$request->get("title"),$request->get("address"),$request->get("city"),$request->get("zip"),$request->get("estart"),$request->get("eend"),$request->files->get("eventimg"),$request->get("edesc"),$request->get("organizer"),$request->get("eventtype"),$request->get("eventtopic"),$request->get("privacy"));
-        return $response;
         if(strpos($response,"EVENT_ADDED")!==false){
             $e=explode("EVENT_ADDED_",$response);
             $eventID=trim($e[1]);
