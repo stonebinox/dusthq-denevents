@@ -265,5 +265,20 @@ class eventMaster extends eventTypeMaster
             }
         }
     }
+    function publishEvent()
+    {
+        if($this->eventValid)
+        {
+            $app=$this->app;
+            $eventID=$this->event_id;
+            $em="UPDATE event_master SET stat='1' WHERE idevent_master='$eventID'";
+            $em=$app['db']->executeUpdate($em);
+            return "EVENT_PUBLISHED";
+        }
+        else
+        {
+            return "INVALID_EVENT_ID";
+        }
+    }
 }
 ?>
