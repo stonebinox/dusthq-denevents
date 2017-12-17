@@ -413,7 +413,7 @@ app.controller("event",function($scope,$http,$compile){
             var eventName=stripslashes(event.event_name);
             var eventImage=event.event_image;
             var stat=event.stat;
-            var start=event.start_start;
+            var start=event.event_start;
             var end=event.event_end;
             var sp=start.split(" ");
             var sdate=dateFormat(sp[0]);
