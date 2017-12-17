@@ -233,7 +233,7 @@ $app->get("/createTickets/{eventID}",function($eventID) use($app){
         return $app->redirect("/login");
     }
 });
-$app->post("/events/createTickets",function(Request $request) use($app){
+$app->post("/events/addTickets",function(Request $request) use($app){
     if(($app['session']->get("event_id"))&&($request->get("tname")))
     {
         require("../classes/adminMaster.php");
