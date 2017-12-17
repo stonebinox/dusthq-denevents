@@ -91,7 +91,11 @@ app.controller("home",function($scope,$compile,$http){
                 var eventType=eventTypes[i];
                 var eventTypeID=eventType.idevent_type_master;
                 var typeName=stripslashes(eventType.type_name);
-                text+='<div class="col-sm-4"><div style="width:100%;height:150px;overflow:none;background:#000000;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer;"><h2 class="text-center" style="position:relative;top:30px;">'+typeName+'</h2></div></div>';
+                var typeImage=eventType.type_image;
+                if(!validate(typeImage)){
+                    typeImage='images/no-image.png';
+                }
+                text+='<div class="col-sm-4"><div style="width:100%;height:150px;overflow:none;background:#000000 url('+typeImage+') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer;"><h2 class="text-center" style="position:relative;top:30px;">'+typeName+'</h2></div></div>';
             }
             text+='</div>';
             $("#categorylist").html(text);
