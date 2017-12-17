@@ -383,6 +383,7 @@ app.controller("event",function($scope,$http,$compile){
         $http.get("event/getEvent")
         .then(function success(response){
             response=response.data;
+            console.log(response);
             if(typeof response=="object"){
                 $scope.event=response;
                 $scope.displayEvent();
