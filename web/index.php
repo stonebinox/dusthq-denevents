@@ -278,5 +278,15 @@ $app->get("/events/getTickets",function() use($app){
         return "INVALID_PARAMETERS";
     }
 });
+$app->get("/dashboard",function() use($app){
+    if($app['session']->get("uid"))
+    {
+        return $app['twig']->render("dashboard.html.twig");
+    }
+    else
+    {
+        return $app->redirect("/login");
+    }
+});
 $app->run();
 ?>
