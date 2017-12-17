@@ -380,7 +380,7 @@ app.controller("event",function($scope,$http,$compile){
     };
     $scope.event=null;
     $scope.getEvent=function(){
-        $http.get("../event/getEvent")
+        $http.get("../events/getEvent")
         .then(function success(response){
             response=response.data;
             console.log(response);
