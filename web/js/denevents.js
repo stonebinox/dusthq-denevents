@@ -428,8 +428,13 @@ app.controller("event",function($scope,$http,$compile){
         $http.get("../events/getTickets")
         .then(function success(response){
             response=response.data;
+            console.log(response);
             if(typeof response=="object"){
                 $scope.tickets=response;
+                $("#eventreview").removeClass("disabled");
+                $("#eventreview").click(function(){
+                    window.location='dashboard';
+                });
                 $scope.displayTickets();
             } 
             else{
@@ -441,6 +446,8 @@ app.controller("event",function($scope,$http,$compile){
                     break;
                     case "NO_TICKETS_FOUND":
                     $("#ticketdetails").html('No ticket types found');
+                    $("#eventreview").addClass("disabled");
+                    $("#eventreview").click(null);
                     break;
                 }
             }

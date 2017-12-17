@@ -48,7 +48,7 @@
         <hr>
         <div class="row">
             <div class="col-sm-8 text-center">
-                <a href="#"><h3 class="glyphicon glyphicon-share"></h3></a>&nbsp;&nbsp;<a href="#"><h3 class="glyphicon glyphicon-bookmark"></h3></a>
+                <a href="#" data-toggle="tooltip" title="Share this event" data-placement="auto"><h3 class="glyphicon glyphicon-share"></h3></a>&nbsp;&nbsp;<a href="#" data-toggle="tooltip" title="Save this event" data-placement="auto"><h3 class="glyphicon glyphicon-bookmark"></h3></a>
             </div>
             <div class="col-sm-4 text-center">
                 <button type="button" class="btn btn-success btn-lg">Register</button>
@@ -76,6 +76,13 @@
     <br>
     <br>
     <br>
+    <script type="text/javascript">
+    <!--
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger:'hover'
+    });
+    //-->
+    </script>
     <div id="footer" onclick="window.location='https://twitter.com/thedustmakers';"></div>
 </body>
 {% endblock %}
