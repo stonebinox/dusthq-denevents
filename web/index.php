@@ -230,7 +230,7 @@ $app->post("/events/createTickets",function(Request $request) use($app){
         $response=$ticket->addTicket($app['session']->get("event_id"),$request->get("quan"),1,$request->get("price"));
         if($response=="TICKET_ADDED")
         {
-            return $app->redirect("/dashboard?suc=EVENT_ADDED");
+            return $app->redirect("/createTickets/".$app['session']->get("event_id")."?suc=TICKETS_ADDED");
         }
         else
         {

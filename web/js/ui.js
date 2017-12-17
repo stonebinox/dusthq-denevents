@@ -128,11 +128,14 @@ function readParams(){
 	}
 	var suc=getUrlParameter("suc");
 	if(validate(suc)){
-			switch(suc){
-					case "ACCOUNT_CREATED":
-					suc='Account created successfully. You may login to your account now.';
-					break;
-			}
-			$("#message").html('<div class="alert alert-success"><strong>Success</strong> '+suc+'</div>');
+		switch(suc){
+			case "ACCOUNT_CREATED":
+			suc='Account created successfully. You may login to your account now.';
+			break;
+			case "TICKETS_ADDED":
+			suc='Ticket type added successfully.';
+			break;
+		}
+		$("#message").html('<div class="alert alert-success"><strong>Success</strong> '+suc+'</div>');
 	}
 }
