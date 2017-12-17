@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<body ng-app="denevents" ng-controller="event" ng-init="getUser()" onload="readParams()">
+<body ng-app="denevents" ng-controller="dashboard" ng-init="getUser()" onload="readParams()">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -37,10 +37,12 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container" ng-init="eventCount=0;getEvents();">
         <h1 class="text-center">Manage Events</h1>
         <div class="text-center" id="message"></div>
-        
+        <hr>
+        <h3>Created events ({[{eventCount}]}</h3>
+        <div class="well" id="eventlist"></div>
     </div>
     <div class="container-fluid">
         <div id="myModal" class="modal fade" role="dialog"></div>

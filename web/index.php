@@ -48,13 +48,28 @@ $app->before(function(Request $request) use($app){
 $app->get("/",function() use($app){
     return $app['twig']->render("index.html.twig");
 });
-$app->get("/events/getEvents",function() use($app){
+$app->get("/events/getEvents",function(Request $request) use($app){
     require("../classes/adminMaster.php");
     require("../classes/userMaster.php");
     require("../classes/eventTypeMaster.php");
     require("../classes/eventMaster.php");
     $event=new eventMaster;
-    $events=$event->getEvents();
+    $offset=0;
+    $eventTypeID=NULL;
+    $userID=NULL;
+    if($request->get("offset"))
+    {
+        $offset=$request->get("offset");
+    }
+    if($request->get("event_type_id"))
+    {
+        $eventTypeID=$request->get("event_type_id");
+    }
+    if(($request->get("user_id"))&&($app['session']->get("uid")))
+    {
+        $userID=$app['session']->get("uid");
+    }
+    $events=$event->getEvents($offset,$eventTypeID,$userID);
     if(is_array($events))
     {
         return json_encode($events);

@@ -5,6 +5,9 @@ Last modified: 14/12/17 16:15
 Comments: Main js file for denevents.
 ----------------------------------*/
 var app=angular.module("denevents",[]);
+app.config(function($interpolateProvider){
+    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+});
 app.controller("home",function($scope,$compile,$http){
     $scope.eventsArray=[];
     $scope.heroPosition=0;
@@ -375,6 +378,56 @@ app.controller("event",function($scope,$http,$compile){
             console.log(response);
             messageBox("Problem","Something went wrong while getting event types. Please try again later.");
         });
+    };
+});
+app.controller("dashboard",function($scope,$compile,$http){
+    $scope.eventArray=[];
+    $scope.getEvents=function(){
+        $http.get("events/getEvents?user_id=1")
+        .then(function success(response){
+            response=response.data;
+            if(typeof response=="object"){
+                $scope.eventArray=response;
+                $scope.eventCount=$scope.eventArray.length;
+                $scope.displayEvents();
+            }
+            else{
+                response=$.trim(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while getting the list of events you've created. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "NO_EVENTS_FOUND":
+                    $("#eventlist").html('<p>No events created.</p>');
+                    break;
+                    case "INVALID_USER_ID":
+                    window.location="logout";
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while getting list of events you've created. Please try again later.");
+        });
+    };
+    $scope.displayEvents=function(){
+        if(validate($scope.eventArray)){
+            var events=$scope.eventArray;
+            var text='<div class="row">';
+            for(var i=0;i<events.length;i++){
+                var event=events[i];
+                var eventID=event.idevent_master;
+                var eventName=stripslashes(event.event_name);
+                var eventImage=event.event_image;
+                var eventType=event.event_type_master_idevent_type_master;
+                var typeName=stripslashes(eventType.type_name);
+                text+='<div class="col-md-4"><div class="thumbnail"><a href="event/'+eventID+'"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong><br><span class="text-info">'+typeName+'</span></p></div></a></div></div>';
+            }
+            text+='</div>';
+            $("#eventlist").html(text);
+        }
     };
 });
 function loadImagePreview(){
