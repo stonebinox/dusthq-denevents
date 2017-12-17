@@ -249,6 +249,7 @@ app.controller("profile",function($scope,$compile,$http){
             $("#accountheader").addClass("dropdown-toggle");
             $("#accountheader").attr("data-toggle","dropdown");
             $("#accountheader").parent().attr("ng-init",'savedCount=0;ticketCount=0;');
+            $("#accountheader").parent().addClass("active");
             $("#accountheader").parent().append('<ul class="dropdown-menu"><li><a href="#">Tickets <span class="badge">{[{ticketCount}]}</span></a></li><li><a href="#">Saved <span class="badge">{[{savedCount}]}</span></a></li><li><a href="dashboard">Manage events</a></li><li><a href="#">Contacts</a></li><li class="active"><a href="profile">Account settings</a></li><li><a href="logout">Log out</a></li></ul>');
             $compile($("#accountheader").parent())($scope);
         }
@@ -467,6 +468,7 @@ app.controller("dashboard",function($scope,$compile,$http){
             $("#accountheader").addClass("dropdown-toggle");
             $("#accountheader").attr("data-toggle","dropdown");
             $("#accountheader").parent().attr("ng-init",'savedCount=0;ticketCount=0;');
+            $("#accountheader").parent().addClass("active");
             $("#accountheader").parent().append('<ul class="dropdown-menu"><li><a href="#">Tickets <span class="badge">{[{ticketCount}]}</span></a></li><li><a href="#">Saved <span class="badge">{[{savedCount}]}</span></a></li><li><a href="dashboard">Manage events</a></li><li><a href="#">Contacts</a></li><li class="active"><a href="profile">Account settings</a></li><li><a href="logout">Log out</a></li></ul>');
             $compile($("#accountheader").parent())($scope);
         }
