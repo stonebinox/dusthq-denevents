@@ -379,7 +379,7 @@ app.controller("event",function($scope,$http,$compile){
         });
     };
     $scope.event=null;
-    $Scope.getEvent=function(){
+    $scope.getEvent=function(){
         $http.get("event/getEvent")
         .then(function success(response){
             response=response.data;
