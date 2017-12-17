@@ -381,8 +381,7 @@ app.controller("event",function($scope,$http,$compile){
                 $scope.getTickets();
             }
             else{
-                // $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
-                $scope.getTickets();
+                $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
             $("#eventdesc").html(eDesc);
             var dateSpan='<span class="text-info">'+sdate+' at '+sp[1]+' to ';
@@ -414,12 +413,7 @@ app.controller("event",function($scope,$http,$compile){
                     messageBox("Problem","Something went wrong while trying to load ticket information. Please try again later. This is the error we see: "+response);
                     break;
                     case "NO_TICKETS_FOUND":
-                    if($scope.event.stat==1){
-                        $("#ticketdetails").html('No ticket types found');
-                    }
-                    else{
-                        $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
-                    }
+                    $("#ticketdetails").html('No ticket types found');
                     $("#eventreview").addClass("disabled");
                     $("#eventreview").click(null);
                     break;
