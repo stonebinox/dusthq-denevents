@@ -437,7 +437,7 @@ app.controller("event",function($scope,$http,$compile){
             else{
                 $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
-            $("#eventdesc").html()
+            $("#eventdesc").html(eDesc);
         }
     };
     $scope.tickets=[];
