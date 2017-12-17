@@ -128,27 +128,36 @@ class ticketMaster extends eventMaster
             return "INVALID_TICKET_ID";
         }
     }
-    function getTickets()
+    function getTickets($eventID)
     {
         $app=$this->app;
-        $tm="SELECT idticket_master FROM ticket_master WHERE stat='1'";
-        $tm=$app['db']->fetchAll($tm);
-        $ticketArray=array();
-        foreach($tm as $ticketRow)
+        $eventID=secure($eventID);
+        eventMaster::__construct($eventID);
+        if($this->eventValid)
         {
-            $ticketID=$ticket['idticket_master'];
-            $this->__construct($ticketID);
-            $ticket=$this->getTicket();
-            if(is_array($ticket))
+            $tm="SELECT idticket_master FROM ticket_master WHERE stat='1' AND event_master_idevent_master='$eventID'";
+            $tm=$app['db']->fetchAll($tm);
+            $ticketArray=array();
+            foreach($tm as $ticketRow)
             {
-                array_push($ticketArray,$ticket);
+                $ticketID=$ticket['idticket_master'];
+                $this->__construct($ticketID);
+                $ticket=$this->getTicket();
+                if(is_array($ticket))
+                {
+                    array_push($ticketArray,$ticket);
+                }
             }
+            if(count($ticketArray)>0)
+            {
+                return $ticketArray;
+            }
+            return "NO_TICKETS_FOUND";
         }
-        if(count($ticketArray)>0)
+        else
         {
-            return $ticketArray;
+            return "INVALID_EVENT_ID";
         }
-        return "NO_TICKETS_FOUND";
     }
 }
 ?>

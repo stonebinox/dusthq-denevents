@@ -172,6 +172,39 @@ app.controller("home",function($scope,$compile,$http){
             $("#tname").parent().addClass("has-error");
         }
     };
+    $scope.getTickets=function(){
+        $http.get("events/getTickets")
+        .then(function success(response){
+            response=response.data;
+            console.log(response);
+            if(typeof response=="object"){
+                $("#eventreview").removeClass("disabled");
+                $("#eventreview").click(function(){
+                    window.location='dashboard';
+                });
+            }
+            else{
+                response=$.trim(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while getting some information. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "NO_TICKETS_FOUND":
+                    $("#eventreview").addClass("disabled");
+                    $("#eventreview").click(null);
+                    break;
+                    case "INVALID_EVENT_ID":
+                    messageBox("Invalid Event","The event you're trying to add tickets to is invalid.");
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while loading some events. Please try again later.");
+        });
+    };
 });
 app.controller("profile",function($scope,$compile,$http){
     $scope.userArray=[];

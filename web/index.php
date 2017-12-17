@@ -242,5 +242,26 @@ $app->post("/events/createTickets",function(Request $request) use($app){
         return $app->redirect("/createTickets/".$app['session']->get("event_id")."?err=INVALID_PARAMETERS");
     }
 });
+$app->get("/events/getTickets",function() use($app){
+    if($app['session']->get("event_id"))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        require("../classes/ticketMaster.php");
+        $ticket=new ticketMaster;
+        $tickets=$ticket->getTickets($app['session']->get("event_id"));
+        if(is_array($tickets))
+        {
+            return json_encode($tickets);
+        }
+        return $tickets;
+    }
+    else
+    {
+        return "INVALID_PARAMETERS";
+    }
+});
 $app->run();
 ?>
