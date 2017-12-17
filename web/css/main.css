@@ -30,7 +30,7 @@ h1{
     -moz-background-size:contain;
     background-size:contain;
 }
-h2{
+.categoryHeading{
     font-family: Bangers, Arial, Helvetica, sans-serif;
     color:#ffffff;
     width:100%;
