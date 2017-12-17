@@ -399,6 +399,8 @@ app.controller("event",function($scope,$http,$compile){
             var eventTopic=event.event_topic;
             var eDesc=nl2br(stripslashes(event.event_description));
             var address=nl2br(stripslashes(event.event_address));
+            var user=event.user_master_iduser_master;
+            var userID=user.iduser_master;
             $("#eventimg").css({
                 "background":"#000000 url("+eventImage+") center",
                 "-webkit-background-size":"cover",
@@ -448,6 +450,9 @@ app.controller("event",function($scope,$http,$compile){
                     $("#ticketdetails").html('No ticket types found');
                     $("#eventreview").addClass("disabled");
                     $("#eventreview").click(null);
+                    break;
+                    case "USER_IS_OWNER":
+                    $("#ticketdetails").html('<button type="button" class="btn btn-default">View tickets</button>');
                     break;
                 }
             }
