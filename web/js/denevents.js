@@ -428,7 +428,7 @@ app.controller("event",function($scope,$http,$compile){
                 "width":"100%",
                 "min-height":"300px"
             });
-            var text='<h1>'+eventName+'</h1><small>'+date+' at '+sp[1]+'</small><br><strong>'+typeName+'&nbsp;&bull;&nbsp;'+eventTopic+'</strong><div id="ticketdetails"></div>';
+            var text='<h1>'+eventName+'</h1><strong>'+typeName+'&nbsp;&bull;&nbsp;'+eventTopic+'</strong><br><small>'+date+' at '+sp[1]+'</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
         }
     };
