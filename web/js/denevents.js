@@ -173,6 +173,7 @@ app.controller("home",function($scope,$compile,$http){
         }
     };
     $scope.getTickets=function(){
+        console.log("here");
         $http.get("events/getTickets")
         .then(function success(response){
             response=response.data;
