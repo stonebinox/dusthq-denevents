@@ -91,7 +91,7 @@ $app->get("/events/getEventTypes",function() use($app){
 $app->get("/login",function() use($app){
     if($app['session']->get("uid"))
     {
-        return $app->redirect("/profile");
+        return $app->redirect("/dashboard");
     }
     return $app['twig']->render("login.html.twig");
 });
