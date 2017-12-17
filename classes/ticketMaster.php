@@ -114,7 +114,7 @@ class ticketMaster extends eventMaster
         {
             $app=$this->app;
             $tm="SELECT * FROM ticket_master WHERE idticket_master='$ticketID'";
-            $tm=$app['db']->fecthAssoc($tm);
+            $tm=$app['db']->fetchAssoc($tm);
             if(validate($tm))
             {
                 $eventID=$tm['event_master_idevent_master'];
