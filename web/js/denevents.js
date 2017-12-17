@@ -420,6 +420,7 @@ app.controller("event",function($scope,$http,$compile){
             var eventPrice=event.event_price;
             var typeName=stripslashes(eventType.type_name);
             var eventTopic=event.event_topic;
+            var eDesc=nl2br(stripslashes(event.event_description));
             $("#eventimg").css({
                 "background":"#000000 url("+eventImage+") center",
                 "-webkit-background-size":"cover",
@@ -436,6 +437,7 @@ app.controller("event",function($scope,$http,$compile){
             else{
                 $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
+            $("#eventdesc").html()
         }
     };
     $scope.tickets=[];
