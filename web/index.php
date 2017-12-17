@@ -269,18 +269,7 @@ $app->get("/events/getTickets",function() use($app){
         $tickets=$ticket->getTickets($app['session']->get("event_id"));
         if(is_array($tickets))
         {
-            $ticket=$tickets[0];
-            $event=$ticket['event_master_idevent_master'];
-            $user=$event['user_master_iduser_master'];
-            $userID=$user['iduser_master'];
-            if($userID!=$app['session']->get("uid"))
-            {
-                return json_encode($tickets);
-            }
-            else
-            {
-                return "USER_IS_OWNER";
-            }
+            return json_encode($tickets);
         }
         return $tickets;
     }
