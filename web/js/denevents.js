@@ -422,6 +422,7 @@ app.controller("event",function($scope,$http,$compile){
             var typeName=stripslashes(eventType.type_name);
             var eventTopic=event.event_topic;
             var eDesc=nl2br(stripslashes(event.event_description));
+            var address=nl2br(stripslashes(event.event_address));
             $("#eventimg").css({
                 "background":"#000000 url("+eventImage+") center",
                 "-webkit-background-size":"cover",
@@ -439,10 +440,10 @@ app.controller("event",function($scope,$http,$compile){
                 $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
             $("#eventdesc").html(eDesc);
-            var dateSpan=sdate+' at '+sp[1]+' to ';
+            var dateSpan='<span class="text-info">'+sdate+' at '+sp[1]+' to ';
             sp=end.split(" ");
             var edate=dateFormat(sp[0]);
-            dateSpan+=edate+' at '+sp[1];
+            dateSpan+=edate+' at '+sp[1]+'</span><br><p>'+address+'</p>';
             $("#eventadd").html(dateSpan);
         }
     };
