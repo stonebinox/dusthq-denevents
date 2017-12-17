@@ -378,6 +378,59 @@ app.controller("event",function($scope,$http,$compile){
             messageBox("Problem","Something went wrong while getting event types. Please try again later.");
         });
     };
+    $scope.event=null;
+    $Scope.getEvent=function(){
+        $http.get("event/getEvent")
+        .then(function success(response){
+            response=response.data;
+            if(typeof response=="object"){
+                $scope.event=response;
+                $scope.displayEvent();
+            }
+            else{
+                response=$.trim(response);
+                switch(response){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while getting information about this event. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "INVALID_EVENT_ID":
+                    messageBox("Invalid Event","This is an invalid event and doesn't exist any more.");
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while getting information about this event. Please try again later.");
+        });
+    };
+    $scope.displayEvent=function(){
+        if(validate($scope.event)){
+            var event=$scope.event;
+            var eventID=event.idevent_master;
+            var eventName=stripslashes(event.event_name);
+            var eventImage=event.event_image;
+            var stat=event.stat;
+            var timestamp=event.timestamp;
+            var sp=timestamp.split(" ");
+            var date=dateFormat(sp[0]);
+            var eventType=event.event_type_master_idevent_type_master;
+            var eventPrice=event.event_price;
+            var typeName=stripslashes(eventType.type_name);
+            var eventTopic=event.event_topic;
+            $("#eventimg").css({
+                "background":"#000000 url("+eventImage+") center",
+                "-webkit-background-size":"cover",
+                "-moz-background-size":"cover",
+                "background-size":"cover",
+                "width":"100%",
+                "min-height":"300px"
+            });
+            var text='<h1>'+eventName+'</h1><small>'+date+' at '+sp[1]+'</small><div id="ticketdetails"></div>';
+            $("#eventdetails").html(text);
+        }
+    };
 });
 app.controller("dashboard",function($scope,$compile,$http){
     $scope.eventArray=[];

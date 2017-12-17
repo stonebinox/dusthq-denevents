@@ -288,5 +288,9 @@ $app->get("/dashboard",function() use($app){
         return $app->redirect("/login");
     }
 });
+$app->get("/event/{eventID}",function($eventID) use($app){
+    $app['session']->set("event_id");
+    return $app['twig']->render("eventview.html.twig");
+});
 $app->run();
 ?>
