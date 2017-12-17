@@ -149,30 +149,6 @@ app.controller("home",function($scope,$compile,$http){
             }
         }
     }; 
-    $scope.validateTicket=function(){
-        var tname=$.trim($("#tname").val());
-        if(validate(tname)){
-            $("#tname").parent().removeClass("has-error");
-            var tcount=$("#quan").val();
-            if((validate(tcount))&&(tcount>0)){
-                $("#quan").parent().removeClass("has-error");
-                var price=$("#price").val();
-                if((validate(price))&&(price>=0)){
-                    $("#price").parent().removeClass("has-error");
-                    document.ticketcreate.submit();
-                }
-                else{
-                    $("#price").parent().addClass("has-error");
-                }
-            }
-            else{
-                $("#quan").parent().addClass("has-error");
-            }
-        }
-        else{
-            $("#tname").parent().addClass("has-error");
-        }
-    };
     $scope.getTickets=function(){
         console.log("here");
         $http.get("events/getTickets")
@@ -487,6 +463,30 @@ app.controller("event",function($scope,$http,$compile){
             }
             text+='</tbody></table>';
             $("#ticketdetails").html(text);
+        }
+    };
+    $scope.validateTicket=function(){
+        var tname=$.trim($("#tname").val());
+        if(validate(tname)){
+            $("#tname").parent().removeClass("has-error");
+            var tcount=$("#quan").val();
+            if((validate(tcount))&&(tcount>0)){
+                $("#quan").parent().removeClass("has-error");
+                var price=$("#price").val();
+                if((validate(price))&&(price>=0)){
+                    $("#price").parent().removeClass("has-error");
+                    document.ticketcreate.submit();
+                }
+                else{
+                    $("#price").parent().addClass("has-error");
+                }
+            }
+            else{
+                $("#quan").parent().addClass("has-error");
+            }
+        }
+        else{
+            $("#tname").parent().addClass("has-error");
         }
     };
 });
