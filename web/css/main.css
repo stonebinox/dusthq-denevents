@@ -2,6 +2,10 @@
 	font-family: Narrow;
 	src:url(HelveticaNarrow.ttf);
 }
+@font-face{
+    font-family: Bangers;
+    src: url(bangers.regular.ttf);
+}
 body{
     background:url(../images/dust_scratches.png);
 }
@@ -27,12 +31,10 @@ h1{
     background-size:contain;
 }
 h2{
-    font-family: Narrow, Arial, Helvetica, sans-serif;
-    color:#333333;
+    font-family: Bangers, Arial, Helvetica, sans-serif;
+    color:#ffffff;
     width:100%;
-    font-weight:bold;
-    background:rgba(255,255,255,0.8);
-    letter-spacing:1px;
+    background:rgba(0,0,0,0.8);
 }
 #footer{
     position:fixed;
