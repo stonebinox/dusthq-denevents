@@ -430,6 +430,54 @@ app.controller("event",function($scope,$http,$compile){
             });
             var text='<h1>'+eventName+'</h1><strong>'+typeName+'&nbsp;&bull;&nbsp;'+eventTopic+'</strong><br><small>'+date+' at '+sp[1]+'</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
+            if(stat==1){
+                $scope.getTickets();
+            }
+            else{
+                $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
+            }
+        }
+    };
+    $scope.tickets=[];
+    $scope.getTickets=function(){
+        $http.get("../events/getTickets")
+        .then(function success(response){
+            response=response.data;
+            if(typeof response=="object"){
+                $scope.tickets=response;
+                $scope.displayTickets();
+            } 
+            else{
+                response=$.trim(response);
+                switch(respomse){
+                    case "INVALID_PARAMETERS":
+                    default:
+                    messageBox("Problem","Something went wrong while trying to load ticket information. Please try again later. This is the error we see: "+response);
+                    break;
+                    case "NO_TICKETS_FOUND":
+                    $("#ticketdetails").html('No ticket types found');
+                    break;
+                }
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while trying to load ticket information. Please try again later.");
+        });
+    };
+    $scope.displayTickets=function(){
+        if(validate($scope.tickets)){
+            var tickets=$scope.tickets;
+            var text='<table class="table"><thead><tr><th>Ticket name</th><th>Price</th></tr></thead><tbody>';
+            for(var i=0;i<tickets.length;i++){
+                var ticket=tickets[i];
+                var ticketID=ticket.idticket_master;
+                var ticketName=stripslashes(ticket.ticket_name);
+                var price=ticket.ticket_cost;
+                text+='<tr><td>'+ticketName+'</td><td>'+price+'</td></tr>';
+            }
+            text+='</tbody></table>';
+            $("#ticketdetails").html(text);
         }
     };
 });
