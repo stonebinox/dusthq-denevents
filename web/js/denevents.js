@@ -413,9 +413,10 @@ app.controller("event",function($scope,$http,$compile){
             var eventName=stripslashes(event.event_name);
             var eventImage=event.event_image;
             var stat=event.stat;
-            var timestamp=event.timestamp;
-            var sp=timestamp.split(" ");
-            var date=dateFormat(sp[0]);
+            var start=event.start_start;
+            var end=event.event_end;
+            var sp=start.split(" ");
+            var sdate=dateFormat(sp[0]);
             var eventType=event.event_type_master_idevent_type_master;
             var eventPrice=event.event_price;
             var typeName=stripslashes(eventType.type_name);
@@ -429,7 +430,7 @@ app.controller("event",function($scope,$http,$compile){
                 "width":"100%",
                 "min-height":"300px"
             });
-            var text='<h1>'+eventName+'</h1><strong>'+typeName+'&nbsp;&bull;&nbsp;'+eventTopic+'</strong><br><small>'+date+' at '+sp[1]+'</small><div id="ticketdetails"></div>';
+            var text='<h1>'+eventName+'</h1><strong>'+typeName+'&nbsp;&bull;&nbsp;'+eventTopic+'</strong><br><small>'+sdate+' at '+sp[1]+'</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
             if(stat==1){
                 $scope.getTickets();
@@ -438,6 +439,11 @@ app.controller("event",function($scope,$http,$compile){
                 $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
             $("#eventdesc").html(eDesc);
+            var dateSpan=sdate+' at '+sp[1]+' to ';
+            sp=end.split(" ");
+            var edate=dateFormat(sp[0]);
+            dateSpan+=edate+' at '+sp[1];
+            $("#eventadd").html(dateSpan);
         }
     };
     $scope.tickets=[];
