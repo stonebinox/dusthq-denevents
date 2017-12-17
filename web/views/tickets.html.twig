@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block content %}
+<body ng-app="denevents" ng-controller="event" ng-init="getUser()" onload="readParams()">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="https://dusthq-denevents.herokuapp.com/"><img src="images/den_logo.png" class="img-responsive" width=120 alt="Denevents"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-th-list"></span> Browse Events</a></li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-th-large"></span> Organize
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Overview</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Resources</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-comment"></span> Help
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Where are my tickets?</a></li>
+                            <li><a href="#">How to contact the event organizer?</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="login" id="accountheader"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+                    <li class="active"><a href="createEvent"><span class="glyphicon glyphicon-plus"></span> Create Event</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Add tickets</h1>
+        <div class="text-center" id="message"></div>
+        <form enctype="multipart/form-data" method="post" action="events/addTickets" name="ticketcreate">
+            <div class="form-group">
+                <label for="tname">Ticket name</label>
+                <input type="text" name="tname" id="tname" class="form-control" placeholder="Early bird, RSVP, etc.">
+            </div>
+            <div class="form-group">
+                <label for="quan">Quantity available</label>
+                <textarea class="form-control" rows=8 name="quan" id="quan" placeholder="Enter your event's address"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Ticket price</label>
+                <input type="number" name="price" id="price" class="form-control" placeholder="0.00" value="0.00">
+            </div>            
+            <div class="text-center">
+                <button type="button" class="btn btn-primary btn-lg" ng-click="validateTicket()">Review event &amp; publish <span class="glyphicon glyphicon-chevron-right"></span></button>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid">
+        <div id="myModal" class="modal fade" role="dialog"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="footer" onclick="window.location='https://twitter.com/thedustmakers';"></div>
+</body>
+{% endblock %}
