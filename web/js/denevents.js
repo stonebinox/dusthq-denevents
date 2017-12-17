@@ -517,7 +517,7 @@ app.controller("dashboard",function($scope,$compile,$http){
                 var eventImage=event.event_image;
                 var eventType=event.event_type_master_idevent_type_master;
                 var typeName=stripslashes(eventType.type_name);
-                text+='<div class="col-md-4"><div class="thumbnail"><a href="#"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong><br><span class="text-info">'+typeName+'</span><br><div class="btn-group text-center"><button type="button" class="btn btn-primary btn-sm">View tickets</button><button type="button" class="btn btn-danger btn-sm">Delete</button></div></p></div></a></div></div>';
+                text+='<div class="col-md-4"><div class="thumbnail"><a href="#"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong><br><span class="text-info">'+typeName+'</span><br><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-primary btn-xs" onclick="window.location=\'createTickets/'+eventID+'\';">View tickets</button><button type="button" class="btn btn-danger btn-xs">Delete</button></div></div></p></div></a></div></div>';
             }
             text+='</div>';
             $("#eventlist").html(text);
