@@ -515,10 +515,16 @@ app.controller("dashboard",function($scope,$compile,$http){
                 if(stat==2){
                     text+='<button type="button" class="btn btn-warning btn-xs">Publish event</button>';
                 }
-                text+='<button type="button" class="btn btn-danger btn-xs">Delete</button></div></div></p></div></a></div></div>';
+                text+='<button type="button" class="btn btn-danger btn-xs" ng-click="deleteEvent('+eventID+')">Delete</button></div></div></p></div></a></div></div>';
             }
             text+='</div>';
             $("#eventlist").html(text);
+            $compile("#eventlist")($scope);
+        }
+    };
+    $scope.deleteEvent=function(eventID){
+        if(confirm("Are you sure you want to delete this event?")){
+            window.location='events/delete?event_id='+eventID;
         }
     };
     $scope.userArray=[];

@@ -143,6 +143,9 @@ function readParams(){
 			case "EVENT_PUBLISHED":
 			suc="Your event was published successfully and is now live.";
 			break;
+			case "EVENT_DELETED":
+			suc="The event was deleted successfully.";
+			break;
 		}
 		$("#message").html('<div class="alert alert-success"><strong>Success</strong> '+suc+'</div>');
 	}

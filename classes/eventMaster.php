@@ -2,7 +2,7 @@
 /*------------------------------------------
 Author: Anoop Santhanam
 Date created: 13/12/17 20:13
-Last modified: 13/12/17 20:13
+Last modified: 18/12/17 10:50
 Comments: Main class file for event_master
 table.
 ------------------------------------------*/
@@ -155,6 +155,16 @@ class eventMaster extends eventTypeMaster
             return "INVALID_OFFSET_VALUE";
         }
     }
+    function randomizeString($string)
+    {
+        $letters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $random='';
+        for($i=0;$i<strlen($string);$i++)
+        {
+            $random.=$letters[rand(0,strlen($letters))];
+        }
+        return $random;
+    }
     function createEvent($userID,$title,$address,$city,$zip,$eStart,$eEnd,$image,$description,$orgName,$eventTypeID,$eventTopic,$privacy=0)
     {
         $app=$this->app;
@@ -196,23 +206,35 @@ class eventMaster extends eventTypeMaster
                                                     $s3Client=$GLOBALS['s3Client'];
                                                     $file=$image->getRealPath();
                                                     $itemName=secure($image->getClientOriginalName());
-                                                    try{
-                                                        $result = $s3Client->putObject([
-                                                            'ACL'        => 'public-read',
-                                                            'Bucket'     => "denevents",
-                                                            'Key'        => $itemName,
-                                                            'SourceFile' => $file,
-                                                        ]);
-                                                    } catch (Exception $e) {
-                                                        return $e->getMessage();
+                                                    $rev=strrev($itemName);
+                                                    $e=explode(".",$rev);
+                                                    $ext=strrev(trim(strtolower($e[0])));
+                                                    if(($ext=="jpg")||($ext=="jpeg")||($ext=="bmp")||($ext=="png"))
+                                                    {
+                                                        $filename=strrev($e[1]);
+                                                        $random=$this->randomizeString($filename).'.'.$ext;
+                                                        try{
+                                                            $result = $s3Client->putObject([
+                                                                'ACL'        => 'public-read',
+                                                                'Bucket'     => "denevents",
+                                                                'Key'        => $random,
+                                                                'SourceFile' => $file,
+                                                            ]);
+                                                        } catch (Exception $e) {
+                                                            return $e->getMessage();
+                                                        }
+                                                        $path=$result->get('ObjectURL');
+                                                        $in="INSERT INTO event_master (timestamp,user_master_iduser_master,event_name,event_description,event_image,event_type_master_idevent_type_master,event_start,event_end,event_organizer,event_address,event_city,event_privacy,event_topic,stat) VALUES (NOW(),'$userID','$title','$description','$path','$eventTypeID','$eStart','$eEnd','$orgName','$address','$city','$privacy','$eventTopic','2')";
+                                                        $in=$app['db']->executeQuery($in);
+                                                        $em="SELECT idevent_master FROM event_master WHERE stat='2' AND user_master_iduser_master='$userID' ORDER BY idevent_master DESC LIMIT 1";
+                                                        $em=$app['db']->fetchAssoc($em);
+                                                        $eventID=$em['idevent_master'];
+                                                        return "EVENT_ADDED_".$eventID;
                                                     }
-                                                    $path=$result->get('ObjectURL');
-                                                    $in="INSERT INTO event_master (timestamp,user_master_iduser_master,event_name,event_description,event_image,event_type_master_idevent_type_master,event_start,event_end,event_organizer,event_address,event_city,event_privacy,event_topic,stat) VALUES (NOW(),'$userID','$title','$description','$path','$eventTypeID','$eStart','$eEnd','$orgName','$address','$city','$privacy','$eventTopic','2')";
-                                                    $in=$app['db']->executeQuery($in);
-                                                    $em="SELECT idevent_master FROM event_master WHERE stat='2' AND user_master_iduser_master='$userID' ORDER BY idevent_master DESC LIMIT 1";
-                                                    $em=$app['db']->fetchAssoc($em);
-                                                    $eventID=$em['idevent_master'];
-                                                    return "EVENT_ADDED_".$eventID;
+                                                    else
+                                                    {
+                                                        return "INVALID_EVENT_IMAGE_TYPE";
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -271,9 +293,80 @@ class eventMaster extends eventTypeMaster
         {
             $app=$this->app;
             $eventID=$this->event_id;
-            $em="UPDATE event_master SET stat='1' WHERE idevent_master='$eventID'";
-            $em=$app['db']->executeUpdate($em);
-            return "EVENT_PUBLISHED";
+            $userID=secure($userID);
+            userMaster::__construct($userID);
+            if($this->userValid)
+            {
+                $eventOwner=$this->getEventOwner();
+                if($eventOwner==$userID)
+                {
+                    $em="UPDATE event_master SET stat='1' WHERE idevent_master='$eventID'";
+                    $em=$app['db']->executeUpdate($em);
+                    return "EVENT_PUBLISHED";
+                }
+                else
+                {
+                    return "NO_PERMISSION";
+                }
+            }
+            else
+            {
+                return "INVALID_USER_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_EVENT_ID";
+        }
+    }
+    function getEventOwner()
+    {
+        if($this->eventValid)
+        {
+            $app=$this->app;
+            $eventID=$this->event_id;
+            $em="SELECT user_master_iduser_master FROM event_master WHERE idevent_master='$eventID'";
+            $em=$app['db']->fetchAssoc($em);
+            if(validate($em))
+            {
+                return $em['user_master_iduser_master'];
+            }
+            else
+            {
+                return "INVALID_EVENT_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_EVENT_ID";
+        }
+    }
+    function deleteEvent($userID)
+    {
+        if($this->eventValid)
+        {
+            $app=$this->app;
+            $eventID=$this->event_id;
+            $userID=secure($userID);
+            userMaster::__construct($userID);
+            if($this->userValid)
+            {
+                $eventOwner=$this->getEventOwner();
+                if($eventOwner==$userID)
+                {
+                    $em="UPDATE event_master SET stat='0' WHERE idevent_master='$eventID'";
+                    $em=$app['db']->executeUpdate($em);
+                    return "EVENT_DELETED";
+                }
+                else
+                {
+                    return "NO_PERMISSION";
+                }
+            }
+            else
+            {
+                return "INVALID_USER_ID";
+            }
         }
         else
         {

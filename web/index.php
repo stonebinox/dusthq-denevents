@@ -312,16 +312,55 @@ $app->get("/events/getEvent",function() use($app){
         return "INVALID_PARAMETERS";
     }
 });
-$app->get("/events/publish",function() use($app){
+$app->get("/events/publish",function(Request $request) use($app){
     if($app['session']->get("event_id"))
+    {
+        $eventID=$app['session']->get("event_id");
+    }
+    elseif($request->get("event_id"))
+    {
+        $eventID=$request->get("event_id");
+    }
+    if(validate($eventID))
     {
         require("../classes/adminMaster.php");
         require("../classes/userMaster.php");
         require("../classes/eventTypeMaster.php");
         require("../classes/eventMaster.php");
-        $event=new eventMaster($app['session']->get("event_id"));
+        $event=new eventMaster($eventID);
         $response=$event->publishEvent();
         if($response=="EVENT_PUBLISHED")
+        {
+            return $app->redirect("/dashboard?suc=".$response);
+        }
+        else
+        {
+            return $app->redirect("/dashboard?err=".$response);
+        }
+    }
+    else
+    {
+        return $app->redirect("/dashboard");
+    }
+});
+$app->get("/events/delete",function(Request $request) use($app){
+    if($app['session']->get("event_id"))
+    {
+        $eventID=$app['session']->get("event_id");
+    }
+    elseif($request->get("event_id"))
+    {
+        $eventID=$request->get("event_id");
+    }
+    if(validate($eventID))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        $event=new eventMaster($eventID);
+        $response=$event->deleteEvent();
+        if($response=="EVENT_DELETED")
         {
             return $app->redirect("/dashboard?suc=".$response);
         }
