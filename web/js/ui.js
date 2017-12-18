@@ -125,6 +125,9 @@ function readParams(){
 			case "TICKET_TYPE_ALREADY_ADDED":
 			err="This ticket type has already been added.";
 			break;
+			case "INVALID_EVENT_ID":
+			err="This event doesn't exist any more.";
+			break;
 		}
 		$("#message").html('<div class="alert alert-danger"><strong>Error</strong> '+err+'</div>');
 	}
@@ -136,6 +139,9 @@ function readParams(){
 			break;
 			case "TICKETS_ADDED":
 			suc='Ticket type added successfully.';
+			break;
+			case "EVENT_PUBLISHED":
+			suc="Your event was published successfully and is now live.";
 			break;
 		}
 		$("#message").html('<div class="alert alert-success"><strong>Success</strong> '+suc+'</div>');

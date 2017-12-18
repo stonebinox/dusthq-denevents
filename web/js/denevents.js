@@ -396,12 +396,11 @@ app.controller("event",function($scope,$http,$compile){
         $http.get("../events/getTickets")
         .then(function success(response){
             response=response.data;
-            console.log(response);
             if(typeof response=="object"){
                 $scope.tickets=response;
                 $("#eventreview").removeClass("disabled");
                 $("#eventreview").click(function(){
-                    window.location='dashboard';
+                    window.location='../events/publish';
                 });
                 $scope.displayTickets();
             } 

@@ -312,5 +312,28 @@ $app->get("/events/getEvent",function() use($app){
         return "INVALID_PARAMETERS";
     }
 });
+$app->get("/events/publish",function() use($app){
+    if($app['session']->get("event_id"))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        $event=new eventMaster($app['session']->get("event_id"));
+        $response=$event->publishEvent();
+        if($response=="EVENT_PUBLISHED")
+        {
+            return $app->redirect("/dashboard?suc=".$response);
+        }
+        else
+        {
+            return $app->redirect("/dashboard?err=".$response);
+        }
+    }
+    else
+    {
+        return $app->redirect("/dashboard");
+    }
+});
 $app->run();
 ?>
