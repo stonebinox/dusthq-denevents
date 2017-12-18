@@ -513,7 +513,7 @@ app.controller("dashboard",function($scope,$compile,$http){
                 var stat=event.stat;
                 text+='<div class="col-md-4"><div class="thumbnail"><a href="#"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong><br><span class="text-info">'+typeName+'</span><br><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-primary btn-xs" onclick="window.location=\'createTickets/'+eventID+'\';">View tickets</button>';
                 if(stat==2){
-                    text+='<button type="button" class="btn btn-warning btn-xs">Publish event</button>';
+                    text+='<button type="button" class="btn btn-warning btn-xs" onclick="window.location=\'events/publish?event_id='+eventID+'\';">Publish event</button>';
                 }
                 text+='<button type="button" class="btn btn-danger btn-xs" ng-click="deleteEvent('+eventID+')">Delete</button></div></div></p></div></a></div></div>';
             }
