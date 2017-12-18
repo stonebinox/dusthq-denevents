@@ -328,7 +328,7 @@ $app->get("/events/publish",function(Request $request) use($app){
         require("../classes/eventTypeMaster.php");
         require("../classes/eventMaster.php");
         $event=new eventMaster($eventID);
-        $response=$event->publishEvent();
+        $response=$event->publishEvent($app['session']->get("uid"));
         if($response=="EVENT_PUBLISHED")
         {
             return $app->redirect("/dashboard?suc=".$response);
@@ -359,7 +359,7 @@ $app->get("/events/delete",function(Request $request) use($app){
         require("../classes/eventTypeMaster.php");
         require("../classes/eventMaster.php");
         $event=new eventMaster($eventID);
-        $response=$event->deleteEvent();
+        $response=$event->deleteEvent($app['session']->get("uid"));
         if($response=="EVENT_DELETED")
         {
             return $app->redirect("/dashboard?suc=".$response);
