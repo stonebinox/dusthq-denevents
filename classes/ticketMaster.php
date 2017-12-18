@@ -149,9 +149,9 @@ class ticketMaster extends eventMaster
             foreach($tm as $ticketRow)
             {
                 $ticketID=$ticketRow['idticket_master'];
-                echo $ticketID;
                 $this->__construct($ticketID);
                 $ticket=$this->getTicket();
+                var_dump($ticket);
                 if(is_array($ticket))
                 {
                     array_push($ticketArray,$ticket);
