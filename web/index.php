@@ -267,7 +267,6 @@ $app->get("/events/getTickets",function() use($app){
         require("../classes/ticketMaster.php");
         $ticket=new ticketMaster;
         $tickets=$ticket->getTickets($app['session']->get("event_id"));
-        return $tickets;
         if(is_array($tickets))
         {
             return json_encode($tickets);

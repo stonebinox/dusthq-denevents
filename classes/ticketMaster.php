@@ -113,6 +113,7 @@ class ticketMaster extends eventMaster
         if($this->ticketValid)
         {
             $app=$this->app;
+            $ticketID=$this->ticket_id;
             $tm="SELECT * FROM ticket_master WHERE idticket_master='$ticketID'";
             $tm=$app['db']->fetchAssoc($tm);
             if(validate($tm))
@@ -151,7 +152,6 @@ class ticketMaster extends eventMaster
                 $ticketID=$ticketRow['idticket_master'];
                 $this->__construct($ticketID);
                 $ticket=$this->getTicket();
-                var_dump($ticket);
                 if(is_array($ticket))
                 {
                     array_push($ticketArray,$ticket);
