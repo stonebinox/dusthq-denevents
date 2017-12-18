@@ -287,7 +287,7 @@ class eventMaster extends eventTypeMaster
             }
         }
     }
-    function publishEvent()
+    function publishEvent($userID)
     {
         if($this->eventValid)
         {
