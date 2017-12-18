@@ -510,7 +510,12 @@ app.controller("dashboard",function($scope,$compile,$http){
                 var eventImage=event.event_image;
                 var eventType=event.event_type_master_idevent_type_master;
                 var typeName=stripslashes(eventType.type_name);
-                text+='<div class="col-md-4"><div class="thumbnail"><a href="#"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong><br><span class="text-info">'+typeName+'</span><br><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-primary btn-xs" onclick="window.location=\'createTickets/'+eventID+'\';">View tickets</button><button type="button" class="btn btn-danger btn-xs">Delete</button></div></div></p></div></a></div></div>';
+                var stat=event.stat;
+                text+='<div class="col-md-4"><div class="thumbnail"><a href="#"><img src="'+eventImage+'" alt="'+eventName+'" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>'+eventName+'</strong><br><span class="text-info">'+typeName+'</span><br><div class="text-center"><div class="btn-group"><button type="button" class="btn btn-primary btn-xs" onclick="window.location=\'createTickets/'+eventID+'\';">View tickets</button>';
+                if(stat==2){
+                    text+='<button type="button" class="btn btn-warning btn-xs">Publish event</button>';
+                }
+                text+='<button type="button" class="btn btn-danger btn-xs">Delete</button></div></div></p></div></a></div></div>';
             }
             text+='</div>';
             $("#eventlist").html(text);
@@ -557,7 +562,7 @@ app.controller("dashboard",function($scope,$compile,$http){
             $("#accountheader").attr("data-toggle","dropdown");
             $("#accountheader").parent().attr("ng-init",'savedCount=0;ticketCount=0;');
             $("#accountheader").parent().addClass("active");
-            $("#accountheader").parent().append('<ul class="dropdown-menu"><li><a href="#">Tickets <span class="badge">{[{ticketCount}]}</span></a></li><li><a href="#">Saved <span class="badge">{[{savedCount}]}</span></a></li><li><a href="dashboard">Manage events</a></li><li><a href="#">Contacts</a></li><li class="active"><a href="profile">Account settings</a></li><li><a href="logout">Log out</a></li></ul>');
+            $("#accountheader").parent().append('<ul class="dropdown-menu"><li><a href="#">Tickets <span class="badge">{[{ticketCount}]}</span></a></li><li><a href="#">Saved <span class="badge">{[{savedCount}]}</span></a></li><li><a href="dashboard">Manage events</a></li><li><a href="#">Contacts</a></li><li><a href="profile">Account settings</a></li><li><a href="logout">Log out</a></li></ul>');
             $compile($("#accountheader").parent())($scope);
         }
     }
