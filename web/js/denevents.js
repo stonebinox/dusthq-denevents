@@ -450,7 +450,7 @@ app.controller("event",function($scope,$http,$compile){
                 console.log(ticket);
                 var ticketID=ticket.idticket_master;
                 var ticketName=stripslashes(ticket.ticket_name);
-                var quantity=ticket.ticket_quantity;
+                var quantity=ticket.ticket_count;
                 var cost=ticket.ticket_cost;
                 text+='<tr><td>'+ticketName+'</td><td>'+cost+'</td><td>'+quantity+'</td></tr>';
             }
