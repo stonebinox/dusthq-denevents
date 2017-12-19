@@ -458,7 +458,7 @@ app.controller("event",function($scope,$http,$compile){
                 }
                 text+='</select></td></tr>';
             }
-            text+='</tbody></table><hr><button type="button" class="btn btn-primary" ng-click="purchaseTickets()">Buy</button><div id="ticketform"></div>';
+            text+='</tbody></table><hr><button type="button" class="btn btn-primary" id="paybut" ng-click="purchaseTickets()">Buy</button><div id="ticketform"></div>';
             messageBox("Tickets",text);
             $compile("#myModal")($scope);
         }
@@ -481,8 +481,11 @@ app.controller("event",function($scope,$http,$compile){
                 var price=parseFloat(ticket.ticket_cost);
                 total+=price;
             }
-            var json=JSON.stringify(ticketToBuy);
-            $("#ticketform").html('<form name="ticketform" method="post" action="../book/purchaseTickets"><input type="hidden" name="tickets" value="'+json+'"><input type="hidden" name="total" value="'+total+'"><script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_AaNN3vmVBn3clhgdqGa9CMXX" data-amount="'+(total*100)+'" data-name="Denevents" data-description="Widget" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"> </script></form>');
+            if(ticketToBuy.length>0){
+                var json=JSON.stringify(ticketToBuy);
+                $("#paybut").css("display","none");
+                $("#ticketform").html('<form name="ticketform" method="post" action="../book/purchaseTickets"><input type="hidden" name="tickets" value="'+json+'"><input type="hidden" name="total" value="'+total+'"><script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_AaNN3vmVBn3clhgdqGa9CMXX" data-amount="'+(total*100)+'" data-name="Denevents" data-description="Widget" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"> </script></form>');
+            }
             // document.ticketform.submit();
         }
     };
