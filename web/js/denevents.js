@@ -447,6 +447,7 @@ app.controller("event",function($scope,$http,$compile){
             var text='<table class="table"><thead><tr><th>Type</th><th>Price</th><th>Quantity</th></tr></thead><tbody>';
             for(var i=0;i<$scope.tickets.length;i++){
                 var ticket=$scope.tickets[i];
+                console.log(ticket);
                 var ticketID=ticket.idticket_master;
                 var ticketName=stripslashes(ticket.ticket_name);
                 var quantity=ticket.ticket_quantity;
