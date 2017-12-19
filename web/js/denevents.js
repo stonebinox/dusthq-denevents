@@ -458,11 +458,32 @@ app.controller("event",function($scope,$http,$compile){
                 }
                 text+='</select></td></tr>';
             }
-            text+='</tbody></table><hr><button type="button" class="btn btn-primary">Buy</button>';
+            text+='</tbody></table><hr><button type="button" class="btn btn-primary" ng-click="purchaseTickets()">Buy</button><div id="ticketform"></div>';
             messageBox("Tickets",text);
+            $compile("#myModal")($scope);
         }
         else{
             messageBox("Coming Soon","This event hasn't been published yet.");
+        }
+    };
+    $scope.purchaseTickets=function(){
+        if($scope.tickets.length>0){
+            var ticketToBuy=[];
+            var total=0;
+            for(var i=0;i<$scope.tickets.length;i++){
+                var ticket=$scope.tickets[i];
+                var ticketID=ticket.idticket_master;
+                var ticketCount=parseInt($("#ticket"+ticketID).val());
+                if(ticketCount>0){
+                    var tick=[ticketID,ticketCount];
+                    ticketToBuy.push(tick);
+                }
+                var price=parseFloat(ticket.ticket_cost);
+                total+=price;
+            }
+            var json=JSON.stringify(ticketToBuy);
+            $("#ticketform").html('<form name="ticketform" method="post" action="../book/purchaseTickets"><input type="hidden" name="tickets" value="'+json+'"><input type="hidden" name="total" value="'+total+'"><script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_AaNN3vmVBn3clhgdqGa9CMXX" data-amount="'+(total*100)+'" data-name="Denevents" data-description="Widget" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"> </script></form>');
+            // document.ticketform.submit();
         }
     };
     $scope.validateTicket=function(){

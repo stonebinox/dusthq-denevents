@@ -154,6 +154,35 @@ class bookingMaster extends ticketMaster
             return "INVALID_TICKET_ID";
         }
     }
+    function processPayment($amount=0)
+    {
+        $amount=secure($amount);
+        if((validate($amount))&&(is_numeric($amount))&&($amount>=0))
+        {
+            if($amount>0)
+            {
+                $app=$this->app;
+                \Stripe\Stripe::setApiKey("pk_test_AaNN3vmVBn3clhgdqGa9CMXX");
+                $amount=$amount*100;
+                $token = $_POST['stripeToken'];
+                $charge = \Stripe\Charge::create(array(
+                "amount" => $amount,
+                "currency" => "usd",
+                "description" => "Ticket purchase",
+                "source" => $token,
+                ));
+                if($charge->failure_code!=NULL)
+                {
+                    return "ERROR_".$charge->failure_message;
+                }
+            }
+            return "PAYMENT_PROCESSED";
+        }
+        else
+        {
+            return "INVALID_PAYMENT_AMOUNT";
+        }
+    }
     function addBooking($userID,$ticketID,$quantity=1)
     {
         $userID=secure($userID);

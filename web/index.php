@@ -374,5 +374,23 @@ $app->get("/events/delete",function(Request $request) use($app){
         return $app->redirect("/dashboard");
     }
 });
+$app->post("/book/purchaseTickets",function(Request $request) use($app){
+    if(($request->get("tickets"))&&($request->get("total")))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        require("../classes/ticketMaster.php");
+        require("../classes/bookingMaster.php");
+        $booking=new bookingMaster;
+        $response=$booking->processPayment();
+
+    }
+    else
+    {
+        return $app->redirect("/event/".$app['session']->get("event_id")."?err=BOOKING_FAILURE");
+    }
+});
 $app->run();
 ?>
