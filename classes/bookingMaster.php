@@ -60,5 +60,152 @@ class bookingMaster extends ticketMaster
             return false;
         }
     }
+    function getBooking()
+    {
+        if($this->bookingValid)
+        {
+            $app=$this->app;
+            $bookingID=$this->booking_id;
+            $bm="SELECT * FROM booking_master WHERE idbooking_master='$bookingID'";
+            $bm=$app['db']->fetchAssoc($bm);
+            if(validate($bm))
+            {
+                $userID=$bm['user_master_iduser_master'];
+                userMaster::__construct($userID);
+                $user=$this->getUser();
+                if(is_array($user))
+                {
+                    $bm['user_master_iduser_master']=$user;
+                }
+                $ticketID=$bm['ticket_master_idticket_master'];
+                ticketMaster::__construct($ticketID);
+                $ticket=$this->getTicket();
+                if(is_array($ticket))
+                {
+                    $bm['ticket_master_idticket_master']=$ticket;
+                }
+                return $bm;
+            }
+            else
+            {
+                return "INVALID_BOOKING_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_BOOKING_ID";
+        }
+    }
+    function getBookings($userID,$offset=0)
+    {
+        $userID=secure($userID);
+        userMaster::__construct($userID);
+        if($this->userValid)
+        {
+            $offset=secure($offset);
+            if((validate($offset))&&(is_numeric($offset))&&($offset>=0))
+            {
+                $app=$this->app;
+                $bm="SELECT idbooking_master FROM booking_master WHERE stat='1' AND user_master_iduser_master='$userID' ORDER BY idbooking_master DESC";
+                $bm=$app['db']->fetchAll($bm);
+                $bookingArray=array();
+                foreach($bm as $booking)
+                {
+                    $bookingID=$booking['idbooking_master'];
+                    $this->__construct($bookingID);
+                    $bookingData=$this->getBooking();
+                    if(is_array($bookingData))
+                    {
+                        array_push($bookingArray,$bookingData);
+                    }
+                }
+                if(count($bookingArray)>0)
+                {
+                    return $bookingArray;
+                }
+                return "NO_BOOKINGS_FOUND";
+            }
+            else
+            {
+                return "INVALID_OFFSET_VALUE";
+            }
+        }
+        else
+        {
+            return "INVALID_USER_ID";
+        }
+    }
+    function getBookingCount($ticketID)
+    {
+        $ticketID=secure($ticketID);
+        ticketMaster::__construct($ticketID);
+        if($this->ticketValid)
+        {
+            $app=$this->app;
+            $bm="SELECT COUNT(idbooking_master) FROM booking_master WHERE stat='1' AND ticket_master_idticket_master='$ticketID'";
+            $bm=$app['db']->fetchAssoc($bm);
+            foreach($bm as $booking)
+            {
+                return $booking;
+            }
+        }
+        else
+        {
+            return "INVALID_TICKET_ID";
+        }
+    }
+    function addBooking($userID,$ticketID,$quantity=1)
+    {
+        $userID=secure($userID);
+        userMaster::__construct($userID);
+        if($this->userValid)
+        {
+            $ticketID=secure($ticketID);
+            ticketMaster::__construct($ticketID);
+            if($this->ticketValid)
+            {
+                $quantity=secure($quantity);
+                if((validate($quantity))&&(is_numeric($quantity))&&($quantity>=1))
+                {
+                    $ticketCount=$this->getTicketCount();
+                    if((is_numeric($ticketCount))&&($ticketCount>0))
+                    {
+                        $bookingCount=$this->getBookingCount($ticketID);
+                        $availableTickets=$ticketCount-$bookingCount;
+                        if(($availableTickets>0)&&($quantity<$availableTickets))
+                        {
+                            $app=$this->app;
+                            $in="INSERT INTO booking_master (timestamp,user_master_iduser_master,ticket_master_idticket_master,ticket_quantity) VALUES (NOW(),'$userID','$eventID','$quantity')";
+                            $in=$app['db']->executeQuery($in);
+                            $bm="SELECT idbooking_master FROM booking_master WHERE stat='1' AND user_master_iduser_master='$userID' AND ticket_master_idticket_master='$ticketID' ORDER BY idbooking_master DESC LIMIT 1";
+                            $bm=$app['db']->fetchAssoc($bm);
+                            $bookingID=$bm['idbooking_master'];
+                            return "BOOKING_ADDED_".$bookingID;
+                        }
+                        else
+                        {
+                            return "NO_TICKETS_AVAILABLE";
+                        }
+                    }
+                    else
+                    {
+                        return "NO_TICKETS_FOUND";
+                    }
+                }
+                else
+                {
+                    return "INVALID_TICKET_QUANTITY";
+                }
+            }
+            else
+            {
+                return "INVALID_TICKET_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_USER_ID";
+        }
+    }
 }
 ?>

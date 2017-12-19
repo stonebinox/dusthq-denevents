@@ -168,5 +168,24 @@ class ticketMaster extends eventMaster
             return "INVALID_EVENT_ID";
         }
     }
+    function getTicketCount($eventID)
+    {
+        $eventID=secure($eventID);
+        eventMaster::__construct($eventID);
+        if($this->eventValid)
+        {
+            $app=$this->app;
+            $tm="SELECT COUNT(idticket_master) FROM ticket_master WHERE stat='1' AND event_master_idevent_master='$eventID'";
+            $tm=$app['db']->fetchAssoc($tm);
+            foreach($tm as $count)
+            {
+                return $count;
+            }
+        }
+        else
+        {
+            return "INVALID_EVENT_ID";
+        }
+    }
 }
 ?>
