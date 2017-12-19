@@ -442,6 +442,24 @@ app.controller("event",function($scope,$http,$compile){
             $("#ticketdetails").html(text);
         }
     };
+    $scope.showTicketList=function(){
+        if($scope.tickets.length>0){
+            var text='<table class="table"><thead><tr><th>Type</th><th>Price</th><th>Quantity</th></tr></thead><tbody>';
+            for(var i=0;i<$scope.tickets.length;i++){
+                var ticket=$scope.tickets[i];
+                var ticketID=ticket.idticket_master;
+                var ticketName=stripslashes(ticket.ticket_name);
+                var quantity=ticket.ticket_quantity;
+                var cost=ticket.ticket_cost;
+                text+='<tr><td>'+ticketName+'</td><td>'+cost+'</td><td>'+quantity+'</td></tr>';
+            }
+            text+='</tbody></table><div class="divider"></div><button type="button" class="btn btn-primary">Buy</button>';
+            messageBox("Tickets",text);
+        }
+        else{
+            messageBox("Coming Soon","This event hasn't been published yet.");
+        }
+    };
     $scope.validateTicket=function(){
         var tname=$.trim($("#tname").val());
         if(validate(tname)){

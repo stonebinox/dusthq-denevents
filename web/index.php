@@ -374,15 +374,5 @@ $app->get("/events/delete",function(Request $request) use($app){
         return $app->redirect("/dashboard");
     }
 });
-$app->get("/events/getTicketCount/{eventID}",function($eventID) use($app){
-    require("../classes/adminMaster.php");
-    require("../classes/userMaster.php");
-    require("../classes/eventTypeMaster.php");
-    require("../classes/eventMaster.php");
-    require("../classes/ticketMaster.php");
-    $ticket=new ticketMaster;
-    $count=$ticket->getTicketCount($eventID);
-    return $count;
-});
 $app->run();
 ?>
