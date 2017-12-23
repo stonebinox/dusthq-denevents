@@ -202,8 +202,7 @@ class bookingMaster extends ticketMaster
                     {
                         $bookingCount=$this->getBookingCount($ticketID);
                         $availableTickets=$ticketCount-$bookingCount;
-                        echo $bookingCount.'<br>'.$availableTickets.'<br>'.$ticketCount.'<br>';
-                        if(($availableTickets>0)&&($quantity<$availableTickets))
+                        if(($availableTickets>0)&&($quantity<=$availableTickets))
                         {
                             $app=$this->app;
                             $in="INSERT INTO booking_master (timestamp,user_master_iduser_master,ticket_master_idticket_master,ticket_quantity) VALUES (NOW(),'$userID','$eventID','$quantity')";
