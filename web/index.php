@@ -104,6 +104,10 @@ $app->post("/login_action",function(Request $request) use($app){
         $auth=$user->authenticateUser($request->get("email"),$request->get("password"));
         if($auth=="AUTHENTICATE_USER")
         {
+            if($app['session']->get("event_id"))
+            {
+                return $app->redirect("/event/".$app['session']->get("event_id"));
+            }
             return $app->redirect("/");
         }
         else
@@ -281,10 +285,6 @@ $app->get("/events/getTickets",function() use($app){
 $app->get("/dashboard",function() use($app){
     if($app['session']->get("uid"))
     {
-        if($app['session']->get("event_id"))
-        {
-            return $app->redirect("/event/".$app['session']->get("event_id"));
-        }
         return $app['twig']->render("dashboard.html.twig");
     }
     else
