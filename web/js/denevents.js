@@ -458,10 +458,9 @@ app.controller("event", function($scope, $http, $compile) {
                     var tick = [ticketID, ticketCount];
                     ticketToBuy.push(tick);
                 }
-                var price = parseFloat(ticket.ticket_cost);
+                var price = parseFloat(ticket.ticket_cost)*ticketCount;
                 total += price;
             }
-            console.log(total);
             if (ticketToBuy.length > 0) {
                 var json = JSON.stringify(ticketToBuy);
                 $("#paybut").css("display", "none");
