@@ -281,6 +281,10 @@ $app->get("/events/getTickets",function() use($app){
 $app->get("/dashboard",function() use($app){
     if($app['session']->get("uid"))
     {
+        if($app['session']->get("event_id"))
+        {
+            return $app->redirect("/event/".$app['session']->get("event_id"));
+        }
         return $app['twig']->render("dashboard.html.twig");
     }
     else
@@ -375,7 +379,7 @@ $app->get("/events/delete",function(Request $request) use($app){
     }
 });
 $app->post("/book/purchaseTickets",function(Request $request) use($app){
-    if(($request->get("tickets"))&&($request->get("total")))
+    if(($app['session']->get("uid"))&&($request->get("tickets"))&&($request->get("total")))
     {
         require("../classes/adminMaster.php");
         require("../classes/userMaster.php");
@@ -402,7 +406,7 @@ $app->post("/book/purchaseTickets",function(Request $request) use($app){
     }
     else
     {
-        return $app->redirect("/event/".$app['session']->get("event_id")."?err=BOOKING_FAILURE");
+        return $app->redirect("/login");
     }
 });
 $app->run();
