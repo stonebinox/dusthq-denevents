@@ -201,11 +201,11 @@ class bookingMaster extends ticketMaster
                     {
                         $bookingCount=$this->getBookingCount($ticketID);
                         $availableTickets=$ticketCount-$bookingCount;
-                        echo $ticketCount.'<br>'.$bookingCount.'<br>'.$availableTickets.'<br>';
+                        echo $ticketCount.'<br>'.$bookingCount.'<br>'.$availableTickets.'<br>'.$quantity;
                         if(($availableTickets>0)&&($quantity<=$availableTickets))
                         {
                             $app=$this->app;
-                            $in="INSERT INTO booking_master (timestamp,user_master_iduser_master,ticket_master_idticket_master,ticket_quantity) VALUES (NOW(),'$userID','$eventID','$quantity')";
+                            $in="INSERT INTO booking_master (timestamp,user_master_iduser_master,ticket_master_idticket_master,ticket_quantity) VALUES (NOW(),'$userID','$ticketID','$quantity')";
                             $in=$app['db']->executeQuery($in);
                             $bm="SELECT idbooking_master FROM booking_master WHERE stat='1' AND user_master_iduser_master='$userID' AND ticket_master_idticket_master='$ticketID' ORDER BY idbooking_master DESC LIMIT 1";
                             $bm=$app['db']->fetchAssoc($bm);
