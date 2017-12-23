@@ -49,10 +49,10 @@ $app->get("/",function() use($app){
     return $app['twig']->render("index.html.twig");
 });
 $app->get("/events/getEvents",function(Request $request) use($app){
-    require("classes/adminMaster.php");
-    require("classes/userMaster.php");
-    require("classes/eventTypeMaster.php");
-    require("classes/eventMaster.php");
+    require("../classes/adminMaster.php");
+    require("../classes/userMaster.php");
+    require("../classes/eventTypeMaster.php");
+    require("../classes/eventMaster.php");
     $event=new eventMaster;
     $offset=0;
     $eventTypeID=NULL;
@@ -77,9 +77,9 @@ $app->get("/events/getEvents",function(Request $request) use($app){
     return $events;
 });
 $app->get("/events/getEventTypes",function() use($app){
-    require("classes/adminMaster.php");
-    require("classes/userMaster.php");
-    require("classes/eventTypeMaster.php");
+    require("../classes/adminMaster.php");
+    require("../classes/userMaster.php");
+    require("../classes/eventTypeMaster.php");
     $eventType=new eventTypeMaster;
     $eventTypes=$eventType->getEventTypes();
     if(is_array($eventTypes))
@@ -98,8 +98,8 @@ $app->get("/login",function() use($app){
 $app->post("/login_action",function(Request $request) use($app){
     if(($request->get("email"))&&($request->get("password")))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
         $user=new userMaster;
         $auth=$user->authenticateUser($request->get("email"),$request->get("password"));
         if($auth=="AUTHENTICATE_USER")
@@ -139,8 +139,8 @@ $app->get("/registration",function() use($app){
 $app->post("/create_action",function(Request $request) use($app){
     if(($request->get("email"))&&($request->get("name"))&&($request->get("password"))&&($request->get("rpassword")))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
         $user=new userMaster;
         $response=$user->createAccount($request->get("name"),$request->get("email"),$request->get("password"),$request->get("rpassword"));
         if($response=="ACCOUNT_CREATED")
@@ -160,8 +160,8 @@ $app->post("/create_action",function(Request $request) use($app){
 $app->get("/user/getUser",function() use($app){
     if($app['session']->get("uid"))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
         $user=new userMaster($app['session']->get("uid"));
         $userData=$user->getUser();
         if(is_array($userData))
@@ -178,8 +178,8 @@ $app->get("/user/getUser",function() use($app){
 $app->get("/logout",function() use($app){
     if($app['session']->get("uid"))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
         $user=new userMaster($app['session']->get("uid"));
         $response=$user->logout();
         return $app->redirect("/");
@@ -202,10 +202,10 @@ $app->get("/createEvent",function() use($app){
 $app->post("/events/createEvent",function(Request $request) use($app){
     if(($request->get("title"))&&($request->get("eventtype")))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
         $event=new eventMaster;
         $response=$event->createEvent($app['session']->get("uid"),$request->get("title"),$request->get("address"),$request->get("city"),$request->get("zip"),$request->get("estart"),$request->get("eend"),$request->files->get("eventimg"),$request->get("edesc"),$request->get("organizer"),$request->get("eventtype"),$request->get("eventtopic"),$request->get("privacy"));
         if(strpos($response,"EVENT_ADDED")!==false){
@@ -236,11 +236,11 @@ $app->get("/createTickets/{eventID}",function($eventID) use($app){
 $app->post("/events/addTickets",function(Request $request) use($app){
     if(($app['session']->get("event_id"))&&($request->get("tname")))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
-        require("classes/ticketMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        require("../classes/ticketMaster.php");
         $ticket=new ticketMaster;
         $response=$ticket->addTicket($app['session']->get("event_id"),$request->get("tname"),$request->get("quan"),1,$request->get("price"));
         if($response=="TICKET_ADDED")
@@ -260,11 +260,11 @@ $app->post("/events/addTickets",function(Request $request) use($app){
 $app->get("/events/getTickets",function() use($app){
     if($app['session']->get("event_id"))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
-        require("classes/ticketMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        require("../classes/ticketMaster.php");
         $ticket=new ticketMaster;
         $tickets=$ticket->getTickets($app['session']->get("event_id"));
         if(is_array($tickets))
@@ -295,10 +295,10 @@ $app->get("/event/{eventID}",function($eventID) use($app){
 $app->get("/events/getEvent",function() use($app){
     if($app['session']->get("event_id"))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
         $event=new eventMaster($app['session']->get("event_id"));
         $eventData=$event->getEvent();
         if(is_array($eventData))
@@ -323,10 +323,10 @@ $app->get("/events/publish",function(Request $request) use($app){
     }
     if(validate($eventID))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
         $event=new eventMaster($eventID);
         $response=$event->publishEvent($app['session']->get("uid"));
         if($response=="EVENT_PUBLISHED")
@@ -354,10 +354,10 @@ $app->get("/events/delete",function(Request $request) use($app){
     }
     if(validate($eventID))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
         $event=new eventMaster($eventID);
         $response=$event->deleteEvent($app['session']->get("uid"));
         if($response=="EVENT_DELETED")
@@ -377,12 +377,12 @@ $app->get("/events/delete",function(Request $request) use($app){
 $app->post("/book/purchaseTickets",function(Request $request) use($app){
     if(($request->get("tickets"))&&($request->get("total")))
     {
-        require("classes/adminMaster.php");
-        require("classes/userMaster.php");
-        require("classes/eventTypeMaster.php");
-        require("classes/eventMaster.php");
-        require("classes/ticketMaster.php");
-        require("classes/bookingMaster.php");
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        require("../classes/ticketMaster.php");
+        require("../classes/bookingMaster.php");
         $booking=new bookingMaster;
         $response=$booking->processPayment();
         if($response=="PAYMENT_PROCESSED")
