@@ -309,8 +309,7 @@ app.controller("event", function($scope, $http, $compile) {
     $scope.getEvent = function() {
         $http.get("../events/getEvent")
             .then(function success(response) {
-                    response = response.data;
-                    console.log(response);
+                    response = response.data;                    
                     if (typeof response == "object") {
                         $scope.event = response;
                         $scope.displayEvent();
@@ -462,6 +461,7 @@ app.controller("event", function($scope, $http, $compile) {
                 var price = parseFloat(ticket.ticket_cost);
                 total += price;
             }
+            console.log(total);
             if (ticketToBuy.length > 0) {
                 var json = JSON.stringify(ticketToBuy);
                 $("#paybut").css("display", "none");
