@@ -455,7 +455,7 @@ app.controller("event", function($scope, $http, $compile) {
                 var ticketID = ticket.idticket_master;
                 var ticketCount = parseInt($("#ticket" + ticketID).val());
                 if (ticketCount > 0) {
-                    var tick = [ticketID, ticketCount];
+                    var tick = [parseInt(ticketID), ticketCount];
                     ticketToBuy.push(tick);
                 }
                 var price = parseFloat(ticket.ticket_cost)*ticketCount;
