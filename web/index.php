@@ -120,6 +120,16 @@ $app->post("/login_action",function(Request $request) use($app){
         return $app->redirect("/login?err=INVALID_CREDENTIALS");
     }
 });
+$app->get("/getLoginStatus",function() use($app){
+    if($app['session']->get("uid"))
+    {
+        return "USER_AUTHENTICATED";
+    }
+    else
+    {
+        return "USER_NOT_AUTHENTICATED";
+    }
+});
 $app->get("/profile",function() use($app){
     if($app['session']->get("uid"))
     {

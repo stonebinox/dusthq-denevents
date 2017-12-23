@@ -446,27 +446,55 @@ app.controller("event", function($scope, $http, $compile) {
             messageBox("Coming Soon", "This event hasn't been published yet.");
         }
     };
+    $scope.getLoginStatus=function(){
+        $http.get("/getLoginStatus")
+        .then(function success(response){
+            response=$.trim(response.data);
+            switch(response){
+                case "INVALID_PARAMETERS":
+                default:
+                messageBox("Problem","Something went wrong while loading some information. Please try again later. This is the error we see: "+response);
+                break;
+                case "USER_AUTHENTICATED":
+                $scope.loginFlag=true;
+                break;
+                case "USER_NOT_AUTHENTICATED":
+                $scope.loginFlag=false;
+                break;
+            }
+        },
+        function error(response){
+            console.log(response);
+            messageBox("Problem","Something went wrong while trying to load some information. Please try again later.");
+        });
+    };
+    $scope.loginFlag=false;
     $scope.purchaseTickets = function() {
-        if ($scope.tickets.length > 0) {
-            var ticketToBuy = [];
-            var total = 0;
-            for (var i = 0; i < $scope.tickets.length; i++) {
-                var ticket = $scope.tickets[i];
-                var ticketID = ticket.idticket_master;
-                var ticketCount = parseInt($("#ticket" + ticketID).val());
-                if (ticketCount > 0) {
-                    var tick = [parseInt(ticketID), ticketCount];
-                    ticketToBuy.push(tick);
+        if($scope.loginFlag){
+            if ($scope.tickets.length > 0) {
+                var ticketToBuy = [];
+                var total = 0;
+                for (var i = 0; i < $scope.tickets.length; i++) {
+                    var ticket = $scope.tickets[i];
+                    var ticketID = ticket.idticket_master;
+                    var ticketCount = parseInt($("#ticket" + ticketID).val());
+                    if (ticketCount > 0) {
+                        var tick = [parseInt(ticketID), ticketCount];
+                        ticketToBuy.push(tick);
+                    }
+                    var price = parseFloat(ticket.ticket_cost)*ticketCount;
+                    total += price;
                 }
-                var price = parseFloat(ticket.ticket_cost)*ticketCount;
-                total += price;
+                if (ticketToBuy.length > 0) {
+                    var json = JSON.stringify(ticketToBuy);
+                    $("#paybut").css("display", "none");
+                    $("#ticketform").html('<form name="ticketform" method="post" action="../book/purchaseTickets"><input type="hidden" name="tickets" value="' + json + '"><input type="hidden" name="total" value="' + total + '"><script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_AaNN3vmVBn3clhgdqGa9CMXX" data-amount="' + (total * 100) + '" data-name="Denevents" data-description="Widget" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"> </script></form>');
+                }
+                // document.ticketform.submit();
             }
-            if (ticketToBuy.length > 0) {
-                var json = JSON.stringify(ticketToBuy);
-                $("#paybut").css("display", "none");
-                $("#ticketform").html('<form name="ticketform" method="post" action="../book/purchaseTickets"><input type="hidden" name="tickets" value="' + json + '"><input type="hidden" name="total" value="' + total + '"><script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_AaNN3vmVBn3clhgdqGa9CMXX" data-amount="' + (total * 100) + '" data-name="Denevents" data-description="Widget" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"> </script></form>');
-            }
-            // document.ticketform.submit();
+        }
+        else{
+            window.location='../login';
         }
     };
     $scope.validateTicket = function() {
