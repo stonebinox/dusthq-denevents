@@ -405,6 +405,7 @@ $app->post("/book/purchaseTickets",function(Request $request) use($app){
             foreach($tickets as $ticket)
             {
                 $response=$booking->addBooking($app['session']->get("uid"),$ticket[0],$ticket[1]);
+                echo $response;
             }
             return "DONE";
         }
