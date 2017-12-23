@@ -387,8 +387,8 @@ $app->post("/book/purchaseTickets",function(Request $request) use($app){
         $response=$booking->processPayment();
         if($response=="PAYMENT_PROCESSED")
         {
-            $tickets=json_decode($request->get("tickets"));
             var_dump($tickets);
+            $tickets=json_decode($request->get("tickets"));
             // $response=$booking->addBooking($app['session']->get("uid"),$ticketID,$quantity);
             return "DONE";
         }
