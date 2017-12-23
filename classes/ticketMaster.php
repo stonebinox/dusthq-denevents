@@ -187,5 +187,27 @@ class ticketMaster extends eventMaster
             return "INVALID_EVENT_ID";
         }
     }
+    function getEventID()
+    {
+        if($this->ticketValid)
+        {
+            $app=$this->app;
+            $ticketID=$this->ticket_id;
+            $tm="SELECT event_master_idevent_master FROM ticket_master WHERE idticket_master='$ticketID'";
+            $tm=$app['db']->fetchAssoc($tm);
+            if(validate($tm))
+            {
+                return $tm['event_master_idevent_master'];
+            }
+            else
+            {
+                return "INVALID_TICKET_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_TICKET_ID";
+        }
+    }
 }
 ?>

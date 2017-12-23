@@ -196,7 +196,8 @@ class bookingMaster extends ticketMaster
                 $quantity=secure($quantity);
                 if((validate($quantity))&&(is_numeric($quantity))&&($quantity>=1))
                 {
-                    $ticketCount=$this->getTicketCount();
+                    $eventID=ticketMaster::getEventID();
+                    $ticketCount=ticketMaster::getTicketCount($eventID);
                     if((is_numeric($ticketCount))&&($ticketCount>0))
                     {
                         $bookingCount=$this->getBookingCount($ticketID);
