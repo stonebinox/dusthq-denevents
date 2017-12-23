@@ -201,7 +201,6 @@ class bookingMaster extends ticketMaster
                     {
                         $bookingCount=$this->getBookingCount($ticketID);
                         $availableTickets=$ticketCount-$bookingCount;
-                        echo $ticketCount.'<br>'.$bookingCount.'<br>'.$availableTickets.'<br>'.$quantity;
                         if(($availableTickets>0)&&($quantity<=$availableTickets))
                         {
                             $app=$this->app;
