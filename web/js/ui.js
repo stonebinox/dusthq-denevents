@@ -1,12 +1,12 @@
 function messageBox(title,content,sizeFlag){
-    title=$.trim(title);
+	title=$.trim(title);
 	var modal=document.getElementById("myModal");
 	$(modal).html('');
-    if(sizeFlag==0){
-        sizeFlag='modal-sm';
-    }
-    else{
-        sizeFlag='modal-lg';
+	if(sizeFlag==0){
+		sizeFlag='modal-sm';
+	}
+	else{
+		sizeFlag='modal-lg';
 	}
 	var dialog=document.createElement("div");
 	$(dialog).addClass("modal-dialog "+sizeFlag);
@@ -46,8 +46,8 @@ function messageBox(title,content,sizeFlag){
 	$("#myModal").modal("show");
 }
 function nl2br (str) {
-    var breakTag = '<br>';
-    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+	var breakTag = '<br>';
+	return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
 function dateFormat(date){ //to format dates from database
 	var sp=date.split("-");
@@ -145,6 +145,9 @@ function readParams(){
 			break;
 			case "EVENT_DELETED":
 			suc="The event was deleted successfully.";
+			break;
+			case "BOOKING_DONE":
+			suc="Booking complete! You will receive an email with a confirmation.";
 			break;
 		}
 		$("#message").html('<div class="alert alert-success"><strong>Success</strong> '+suc+'</div>');

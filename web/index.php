@@ -406,7 +406,7 @@ $app->post("/book/purchaseTickets",function(Request $request) use($app){
             {
                 $response=$booking->addBooking($app['session']->get("uid"),$ticket[0],$ticket[1]);
             }
-            return $app->redirect("/dashboard");
+            return $app->redirect("/dashboard?suc=BOOKING_DONE");
         }
         else
         {
