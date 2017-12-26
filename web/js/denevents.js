@@ -11,6 +11,7 @@ app.config(function($interpolateProvider) {
 app.controller("home", function($scope, $compile, $http) {
     $scope.eventsArray = [];
     $scope.heroPosition = 0;
+    $scope.heroes = ["ardian-lumi-364255.jpg","billetto-editorial-334676.jpg","daniel-hansen-262514.jpg","jens-johnsson-121807.jpg","marjorie-teo-390948.jpg","mona-eendra-339456.jpg","shane-rounce-205195.jpg","sladjana-karvounis-469267.jpg"];
     $scope.eventTypeArray = [];
     $scope.getEvents = function() {
         $http.get("events/getEvents")
@@ -103,32 +104,16 @@ app.controller("home", function($scope, $compile, $http) {
             text += '</div>';
             dropdown+='</select><div class="lis-search"> <i class="fa fa-tags lis-primary"></i> </div>';
             $("#categorydropdown").html(dropdown);
-            console.log(dropdown);
             $("#categorylist").html(text);
         }
     };
     $scope.startHeroEvent = function() {
-        if (validate($scope.eventsArray)) {
-            var events = $scope.eventsArray;
+        if (validate($scope.heroes)) {
+            var heroes = $scope.heroes;
             if (validate(events[$scope.heroPosition])) {
-                var event = events[$scope.heroPosition];
-                var stat = event.stat;
-                var eventID = event.idevent_master;
-                var eventName = stripslashes(event.event_name);
-                var eventDesc = stripslashes(event.event_description);
-                var eventImage = event.event_image;
-                var eventType = event.event_type_master_idevent_type_master;
-                var eventTypeName = eventType.type_name;
-                var eventTimestamp = event.timestamp;
-                var user = event.user_master_iduser_master;
-                var userID = user.iduser_master;
-                var userName = stripslashes(user.user_name);
-                var userDP = user.user_dp;
-                if (!validate(userDP)) {
-                    userDP = 'images/defaultm.jpg';
-                }
+                var hero = heroes$scope.heroPosition];
                 $(".background-image-maker").css({
-                    "background":"#000000 url("+eventImage+")",
+                    "background":"#000000 url("+hero+")",
                     "-webkit-background-size":"cover",
                     "-moz-background-size":"cover",
                     "background-size":"cover"
@@ -139,10 +124,10 @@ app.controller("home", function($scope, $compile, $http) {
                     $scope.heroPosition = 0;
                 }
                 var nextImage = new Image();
-                nextImage.src = events[$scope.heroPosition].event_image;
+                nextImage.src = heroes[$scope.heroPosition];
                 setTimeout(function() {
                     $scope.startHeroEvent();
-                }, 30000);
+                }, 3000);
             }
         }
     };
