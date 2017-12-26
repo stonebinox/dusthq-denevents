@@ -133,6 +133,7 @@ app.controller("home", function($scope, $compile, $http) {
                     text += '<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
                 }
                 text += '</div></div>';
+                $("#hero-event").html(text);
                 $scope.heroPosition += 1;
                 if ($scope.heroPosition >= $scope.eventsArray.length) {
                     $scope.heroPosition = 0;
