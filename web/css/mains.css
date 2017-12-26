@@ -682,7 +682,7 @@ select.form-control:not([size]):not([multiple]) {
   -moz-appearance: none;
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
-  background: url(../images/arrow.png) no-repeat 96%;
+  background: url(../images/img/arrow.png) no-repeat 96%;
   cursor: pointer; }
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -835,7 +835,7 @@ textarea.form-control {
 
 /*======================== Icon-box Css ===============================*/
 .icon-box:hover {
-  background: url(../images/hover.png) center top no-repeat; }
+  background: url(../images/img/hover.png) center top no-repeat; }
 
 .box-line:before {
   content: "";
@@ -846,10 +846,10 @@ textarea.form-control {
   top: 0; }
 
 .box-line-dotted1:before {
-  background: url(../images/border-dotted-1.png) center top no-repeat; }
+  background: url(../images/img/border-dotted-1.png) center top no-repeat; }
 
 .box-line-dotted2:before {
-  background: url(../images/border-dotted-2.png) center bottom no-repeat;
+  background: url(../images/img/border-dotted-2.png) center bottom no-repeat;
   top: 30px; }
 
 /*======================== Price Table Css ===============================*/
