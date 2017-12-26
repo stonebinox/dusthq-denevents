@@ -101,7 +101,7 @@ app.controller("home", function($scope, $compile, $http) {
                 // text += '<div class="col-sm-4"><div class="category" style="background:#ffffff url(' + typeImage + ') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;"><h2 class="categoryHeading text-center" style="position:relative;top:60px;">' + typeName + '</h2></div></div>';
             }
             text += '</div>';
-            dropdown='</select><div class="lis-search"> <i class="fa fa-tags lis-primary"></i> </div>';
+            dropdown+='</select><div class="lis-search"> <i class="fa fa-tags lis-primary"></i> </div>';
             $("#categorydropdown").html(dropdown);
             console.log(dropdown);
             $("#categorylist").html(text);
