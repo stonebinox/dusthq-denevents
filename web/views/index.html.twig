@@ -28,6 +28,16 @@
                 <form class="form-inline">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search events or categories" name="search" id="search">
+                        <select id="date" name="date" class="form-control">
+                            <option value="all" selected="selected">All Dates</option>
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="this_week">This Week</option>
+                            <option value="this_weekend">This Weekend</option>
+                            <option value="next_week">Next Week</option>
+                            <option value="next_month">Next Month</option>
+                        </select>
+                        <button type="button" class="btn btn-primary">Search</button>
                     </div>
                 </form>
             </div>
