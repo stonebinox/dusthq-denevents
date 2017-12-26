@@ -18,7 +18,7 @@ app.controller("home", function($scope, $compile, $http) {
                     response = response.data;
                     if (typeof response == "object") {
                         $scope.eventsArray = response;
-                        // $scope.displayEvents();
+                        $scope.displayEvents();
                         $scope.startHeroEvent();
                     } else {
                         response = $.trim(response);
