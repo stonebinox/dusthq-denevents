@@ -123,6 +123,7 @@ app.controller("home", function($scope, $compile, $http) {
                 $(".background-image-maker").css({
                     "background":"#000000 url("+eventImage+")"
                 });
+                $("#hero-event").html('<img src="'+eventImage+'" alt="Denevents" class="img-fluid d-none">');
                 // var text='<br><br><br><br><br><br><div class="row" style="opacity:0.0;"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
                 // if (stat == 1) {
                 //     text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
