@@ -335,13 +335,13 @@
                                 <h5 class="footer-head">Useful Links</h5>
                                 <ul class="list-unstyled footer-links lis-line-height-2_5">
                                     <li>
-                                        <A href="#"><i class="fa fa-angle-right pr-1"></i> Add Listing</A>
+                                        <A href="createEvent"><i class="fa fa-angle-right pr-1"></i> Create event</A>
                                     </li>
                                     <li>
-                                        <A href="#"><i class="fa fa-angle-right pr-1"></i> Sign In</A>
+                                        <A href="#modal"><i class="fa fa-angle-right pr-1"></i> Sign In</A>
                                     </li>
                                     <li>
-                                        <A href="#"><i class="fa fa-angle-right pr-1"></i> Register</A>
+                                        <A href="#modal"><i class="fa fa-angle-right pr-1"></i> Register</A>
                                     </li>
                                     <!--<li>
                                         <A href="#"><i class="fa fa-angle-right pr-1"></i> Pricing</A>
@@ -355,10 +355,10 @@
                                 <h5 class="footer-head">My Account</h5>
                                 <ul class="list-unstyled footer-links lis-line-height-2_5">
                                     <li>
-                                        <A href="#"><i class="fa fa-angle-right pr-1"></i> Dashboard</A>
+                                        <A href="dashboard"><i class="fa fa-angle-right pr-1"></i> Dashboard</A>
                                     </li>
                                     <li>
-                                        <A href="#"><i class="fa fa-angle-right pr-1"></i> Profile</A>
+                                        <A href="profile"><i class="fa fa-angle-right pr-1"></i> Profile</A>
                                     </li>
                                     <!--<li>
                                         <A href="#"><i class="fa fa-angle-right pr-1"></i> My Listing</A>
@@ -437,23 +437,18 @@
 
                     <!-- Username & Password Login form -->
                     <div class="user_login">
-                        <form>
+                        <form name="loginform" method="post" action="login_action">
 
-                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="username or email address" />
+                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="a valid email address" name="email" required />
                             <br />
 
 
-                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="password" />
+                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="password" name="password" required />
                             <br />
-
-                            <div class="checkbox">
-                                <input id="remember" type="checkbox" />
-                                <label for="remember">Remember me on this computer</label>
-                            </div>
 
                             <div class="action_btns">
 
-                                <a href="#" class="btn btn-primary btn-default mt-3 w-100">Login</a>
+                                <a href="#" class="btn btn-primary btn-default mt-3 w-100" onclick="document.loginform.submit()">Login</a>
                             </div>
                         </form>
                         <br/>
