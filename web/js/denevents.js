@@ -18,7 +18,7 @@ app.controller("home", function($scope, $compile, $http) {
                     response = response.data;
                     if (typeof response == "object") {
                         $scope.eventsArray = response;
-                        $scope.displayEvents();
+                        // $scope.displayEvents();
                         $scope.startHeroEvent();
                     } else {
                         response = $.trim(response);
@@ -120,12 +120,13 @@ app.controller("home", function($scope, $compile, $http) {
                 if (!validate(userDP)) {
                     userDP = 'images/defaultm.jpg';
                 }
-                $("#hero-event").css({
-                    "background":"#000000 url("+eventImage+") center",
-                    "-webkit-background-size":"cover",
-                    "-moz-background-size":"cover",
-                    "background-size":"cover"
-                });
+                // $("#hero-event").css({
+                //     "background":"#000000 url("+eventImage+") center",
+                //     "-webkit-background-size":"cover",
+                //     "-moz-background-size":"cover",
+                //     "background-size":"cover"
+                // });
+                $("#hero-event").html('<img src="'+eventImage+'" alt="Denevents" class="img-fluid d-none">');
                 // var text='<br><br><br><br><br><br><div class="row" style="opacity:0.0;"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
                 // if (stat == 1) {
                 //     text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';

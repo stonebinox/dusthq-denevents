@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-    <body>
+    <body ng-app="denevents" ng-controller="home">
         <!-- header -->
-        <div id="header-fix" class="header fixed-top transperant">
+        <div id="header-fix" class="header fixed-top transperant" ng-init="getEvents()">
             <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light py-lg-0 py-4">
                 <a class="navbar-brand mr-4 mr-md-5" href="index-2.html"><img src="dist/images/logo-v1.png" alt=""></a>
                 <div id="dl-menu" class="dl-menuwrapper d-block d-lg-none float-right">
@@ -165,7 +165,7 @@
         <!-- Page Inner -->
         <section class="image-bg lis-grediant grediant-tb">
             <div class="background-image-maker"></div>
-            <div class="holder-image"> <img src="dist/images/bg4.jpg" alt="" class="img-fluid d-none"> </div>
+            <div class="holder-image" id="hero-event"></div>
             <div class="container">
                 <div class="row justify-content-center pt-5">
                     <div class="col-12 col-md-10 text-center wow fadeInUp">
