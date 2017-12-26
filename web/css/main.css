@@ -8,6 +8,7 @@
 }
 body{
     background:url(../images/dust_scratches.png);
+    overflow-x:hidden;
 }
 h1{
     font-family: Narrow, Arial, Helvetica, sans-serif;
