@@ -126,14 +126,14 @@ app.controller("home", function($scope, $compile, $http) {
                     "-moz-background-size":"cover",
                     "background-size":"cover"
                 });
-                var text='<br><br><br><br><br><br><div class="row" style="opacity:0.0;"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
-                if (stat == 1) {
-                    text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
-                } else {
-                    text += '<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
-                }
-                text += '</div></div>';
-                $("#hero-event").html(text);
+                // var text='<br><br><br><br><br><br><div class="row" style="opacity:0.0;"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
+                // if (stat == 1) {
+                //     text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
+                // } else {
+                //     text += '<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
+                // }
+                // text += '</div></div>';
+                // $("#hero-event").html(text);
                 $scope.heroPosition += 1;
                 if ($scope.heroPosition >= $scope.eventsArray.length) {
                     $scope.heroPosition = 0;
