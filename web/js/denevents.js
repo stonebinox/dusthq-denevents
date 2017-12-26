@@ -127,7 +127,7 @@ app.controller("home", function($scope, $compile, $http) {
                 nextImage.src = heroes[$scope.heroPosition];
                 setTimeout(function() {
                     $scope.startHeroEvent();
-                }, 3000);
+                }, 5000);
             }
         }
     };
