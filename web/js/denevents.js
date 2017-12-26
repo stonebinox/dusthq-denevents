@@ -63,7 +63,7 @@ app.controller("home", function($scope, $compile, $http) {
                 var eventAddress=stripslashes(nl2br(event.event_address));
                 // text += '<div class="col-md-4"><div class="thumbnail"><a href="event/' + eventID + '"><img src="' + eventImage + '" alt="' + eventName + '" class="img-responsive" style="width:250px;"><div class="caption"><p class="text-center"><strong>' + eventName + '</strong><br><span class="text-info">' + typeName + '</span></p></div></a></div></div>';
                 text += '<div class="col-12 col-md-6 col-lg-6 col-xl-4 wow fadeInUp mb-4">'
-                +'<div class="card lis-brd-light text-center text-lg-left"><a href="#"><div class="lis-grediant grediant-tb-light2 lis-relative modImage rounded-top"><img src="'+eventImage+'" alt="'+eventName+'" class="img-fluid rounded-top w-100" /> </div><div class="lis-absolute lis-right-20 lis-top-20"><div class="lis-post-meta border border-white text-white rounded lis-f-14">';
+                +'<div class="card lis-brd-light text-center text-lg-left"><a href="event/'+eventID+'"><div class="lis-grediant grediant-tb-light2 lis-relative modImage rounded-top"><img src="'+eventImage+'" alt="'+eventName+'" class="img-fluid rounded-top w-100" /> </div><div class="lis-absolute lis-right-20 lis-top-20"><div class="lis-post-meta border border-white text-white rounded lis-f-14">';
                 if(stat==2){
                     text+='Coming soon';
                 }
