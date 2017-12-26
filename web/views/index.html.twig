@@ -2,7 +2,7 @@
 {% block content %}
     <body ng-app="denevents" ng-controller="home">
         <!-- header -->
-        <div id="header-fix" class="header fixed-top transperant" ng-init="getEvents()">
+        <div id="header-fix" class="header fixed-top transperant" ng-init="getEvents();getEventTypes();">
             <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light py-lg-0 py-4">
                 <a class="navbar-brand mr-4 mr-md-5" href="#"><img src="images/den_logo.png" alt="Denevents" style="width:100px;"></a>
                 <div id="dl-menu" class="dl-menuwrapper d-block d-lg-none float-right">
@@ -238,7 +238,7 @@
                 </div>
             </div>
             <div class="container-fluid px-0">
-                <div class="fullwidth-carousel-container center2 slider">
+                <div class="fullwidth-carousel-container center2 slider" id="categorylist">
                     <div>
                         <div class="card lis-brd-light text-center text-lg-left lis-info lis-relative">
                             <a href="#">

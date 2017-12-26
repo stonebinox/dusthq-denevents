@@ -85,7 +85,8 @@ app.controller("home", function($scope, $compile, $http) {
     $scope.displayEventTypes = function() {
         if (validate($scope.eventTypeArray)) {
             var eventTypes = $scope.eventTypeArray;
-            var text = '<div class="row">';
+            // var text = '<div class="row">';
+            var text='';
             for (var i = 0; i < eventTypes.length; i++) {
                 var eventType = eventTypes[i];
                 var eventTypeID = eventType.idevent_type_master;
@@ -94,9 +95,10 @@ app.controller("home", function($scope, $compile, $http) {
                 if (!validate(typeImage)) {
                     typeImage = 'images/no-image.png';
                 }
-                text += '<div class="col-sm-4"><div class="category" style="background:#ffffff url(' + typeImage + ') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;"><h2 class="categoryHeading text-center" style="position:relative;top:60px;">' + typeName + '</h2></div></div>';
+                text+='<div><div class="card lis-brd-light text-center text-lg-left lis-info lis-relative"><a href="#"><div class="lis-grediant grediant-tb-light lis-relative modImage rounded"><img src="'+typeImage+'" alt="'+typeName+'" class="img-fluid rounded" /></div><div class="lis-absolute lis-left-20 lis-top-20 lis-bg4 lis-icon lis-rounded-circle-50 text-center"><div class="text-white mb-0 lis-line-height-2_5 h4"><i class="icofont icofont-fast-food"></i></div></div></a><div class="hover-text lis-absolute lis-left-20 lis-bottom-20 lis-font-roboto text-white text-left"><h6 class="text-white mb-0">'+typeName+'</h6><span class="lis-font-roboto">13 listing</span></div></div></div>';
+                // text += '<div class="col-sm-4"><div class="category" style="background:#ffffff url(' + typeImage + ') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;"><h2 class="categoryHeading text-center" style="position:relative;top:60px;">' + typeName + '</h2></div></div>';
             }
-            text += '</div>';
+            // text += '</div>';
             $("#categorylist").html(text);
         }
     };
@@ -127,14 +129,6 @@ app.controller("home", function($scope, $compile, $http) {
                     "background-size":"cover"
                 });
                 // $("#hero-event").html('<img src="'+eventImage+'" alt="Denevents" class="img-fluid d-none">');
-                // var text='<br><br><br><br><br><br><div class="row" style="opacity:0.0;"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
-                // if (stat == 1) {
-                //     text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
-                // } else {
-                //     text += '<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
-                // }
-                // text += '</div></div>';
-                // $("#hero-event").html(text);
                 $scope.heroPosition += 1;
                 if ($scope.heroPosition >= $scope.eventsArray.length) {
                     $scope.heroPosition = 0;
