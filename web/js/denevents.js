@@ -105,7 +105,7 @@ app.controller("home", function($scope, $compile, $http) {
             dropdown+='</select><div class="lis-search"> <i class="fa fa-tags lis-primary"></i> </div>';
             $("#categorydropdown").html(dropdown);
             $("#categorylist").html(text);
-            $(".card").slick({
+            $(".fullwidth-carousel-container").slick({
                 infinite: true,
                 slidesToShow: 3,
                 slidesToScroll: 1
