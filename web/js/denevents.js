@@ -121,7 +121,10 @@ app.controller("home", function($scope, $compile, $http) {
                     userDP = 'images/defaultm.jpg';
                 }
                 $(".background-image-maker").css({
-                    "background":"#000000 url("+eventImage+")"
+                    "background":"#000000 url("+eventImage+")",
+                    "-webkit-background-size":"cover",
+                    "-moz-background-size":"cover",
+                    "background-size":"cover"
                 });
                 $("#hero-event").html('<img src="'+eventImage+'" alt="Denevents" class="img-fluid d-none">');
                 // var text='<br><br><br><br><br><br><div class="row" style="opacity:0.0;"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
