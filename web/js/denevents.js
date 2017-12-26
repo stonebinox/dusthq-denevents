@@ -87,6 +87,7 @@ app.controller("home", function($scope, $compile, $http) {
             var eventTypes = $scope.eventTypeArray;
             // var text = '<div class="row">';
             var text='<div class="fullwidth-carousel-container center2 slider">';
+            var dropdown='<select class="form-control border-top-0 border-left-0 border-right-0 rounded-0 pl-4"><option value="0" selected>All Categories</option>';
             for (var i = 0; i < eventTypes.length; i++) {
                 var eventType = eventTypes[i];
                 var eventTypeID = eventType.idevent_type_master;
@@ -96,9 +97,12 @@ app.controller("home", function($scope, $compile, $http) {
                     typeImage = 'images/no-image.png';
                 }
                 text+='<div><div class="card lis-brd-light text-center text-lg-left lis-info lis-relative"><a href="#"><div class="lis-grediant grediant-tb-light lis-relative modImage rounded"><img src="'+typeImage+'" alt="'+typeName+'" class="img-fluid rounded" style="width:100px;" /></div></a><div class="hover-text lis-absolute lis-left-20 lis-bottom-20 lis-font-roboto text-white text-left"><h6 class="text-white mb-0">'+typeName+'</h6><span class="lis-font-roboto">13 listing</span></div></div></div>';
+                dropdown+='<option value="'+eventTypeID+'">'+typeName+'</option>';
                 // text += '<div class="col-sm-4"><div class="category" style="background:#ffffff url(' + typeImage + ') center;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;"><h2 class="categoryHeading text-center" style="position:relative;top:60px;">' + typeName + '</h2></div></div>';
             }
             text += '</div>';
+            dropdown='</select><div class="lis-search"> <i class="fa fa-tags lis-primary"></i> </div>';
+            $("#categorydropdown").html(dropdown);
             $("#categorylist").html(text);
         }
     };
