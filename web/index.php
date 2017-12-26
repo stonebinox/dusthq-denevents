@@ -46,6 +46,9 @@ $app->before(function(Request $request) use($app){
     return $request->getSession()->start();
 });
 $app->get("/",function() use($app){
+    return $app['twig']->render("index.html.twig");
+});
+$app->get("/home",function() use($app){
     return $app['twig']->render("index2.html.twig");
 });
 $app->get("/events/getEvents",function(Request $request) use($app){
