@@ -111,7 +111,7 @@ app.controller("home", function($scope, $compile, $http) {
                 autoplay: true,
                 slidesToShow: 3,
                 slidesToScroll: 1,
-                arrow: false
+                arrows: false
             });
         }
     };
