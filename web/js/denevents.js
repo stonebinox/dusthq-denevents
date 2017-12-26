@@ -18,7 +18,7 @@ app.controller("home", function($scope, $compile, $http) {
                     response = response.data;
                     if (typeof response == "object") {
                         $scope.eventsArray = response;
-                        $scope.displayEvents();
+                        // $scope.displayEvents();
                         $scope.startHeroEvent();
                     } else {
                         response = $.trim(response);
@@ -120,21 +120,19 @@ app.controller("home", function($scope, $compile, $http) {
                 if (!validate(userDP)) {
                     userDP = 'images/defaultm.jpg';
                 }
-                // $("#hero-event").css({
-                //     "background":"#000000 url("+eventImage+") center",
-                //     "-webkit-background-size":"cover",
-                //     "-moz-background-size":"cover",
-                //     "background-size":"cover"
-                // });
-                // var text='<br><br><br><br><br><br><div class="row"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
-                var text = '<img src="' + eventImage + '" alt="" class="img-fluid d-none">';
-                // if (stat == 1) {
-                //     text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
-                // } else {
-                //     text += '<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
-                // }
-                // text += '</div></div>';
-                $("#hero-event").html(text);
+                $("#hero-event").css({
+                    "background":"#000000 url("+eventImage+") center",
+                    "-webkit-background-size":"cover",
+                    "-moz-background-size":"cover",
+                    "background-size":"cover"
+                });
+                var text='<br><br><br><br><br><br><div class="row"><div class="col-sm-6 col-sm-offset-1"><h3 class="heroHeading" class="text-left">'+eventName+'</h3>';
+                if (stat == 1) {
+                    text += '<button type="button" class="btn btn-primary" btn-lg">Book tickets</button>';
+                } else {
+                    text += '<button type="button" class="btn btn-info btn-lg">Coming soon</button>';
+                }
+                text += '</div></div>';
                 $scope.heroPosition += 1;
                 if ($scope.heroPosition >= $scope.eventsArray.length) {
                     $scope.heroPosition = 0;
