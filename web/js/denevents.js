@@ -111,7 +111,7 @@ app.controller("home", function($scope, $compile, $http) {
         if (validate($scope.heroes)) {
             var heroes = $scope.heroes;
             if (validate(heroes[$scope.heroPosition])) {
-                var hero = heroes[$scope.heroPosition];
+                var hero = "images/heroes/"+heroes[$scope.heroPosition];
                 $(".background-image-maker").css({
                     "background":"#000000 url("+hero+")",
                     "-webkit-background-size":"cover",
