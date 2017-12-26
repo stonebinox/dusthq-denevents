@@ -110,7 +110,7 @@ app.controller("home", function($scope, $compile, $http) {
     $scope.startHeroEvent = function() {
         if (validate($scope.heroes)) {
             var heroes = $scope.heroes;
-            if (validate(events[$scope.heroPosition])) {
+            if (validate(heroes[$scope.heroPosition])) {
                 var hero = heroes[$scope.heroPosition];
                 $(".background-image-maker").css({
                     "background":"#000000 url("+hero+")",
