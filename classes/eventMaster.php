@@ -385,8 +385,8 @@ class eventMaster extends eventTypeMaster
             $em.="event_name LIKE '%$word%' AND event_description LIKE '%$word%' AND event_organizer LIKE '%$word%' AND event_address LIKE '%$word%' AND event_city LIKE '%$word%' AND event_topic LIKE '%$word%' AND ";
         }
         $em=rtrim($em,"AND ");
-        echo $em;
         $em.="ORDER BY hits DESC LIMIT 10";
+        echo $em;
         $em=$app['db']->fetchAll($em);
         $eventArray=array();
         foreach($em as $eventRow)
