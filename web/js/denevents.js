@@ -392,6 +392,7 @@ app.controller("event", function($scope, $http, $compile) {
             var edate = dateFormat(sp[0]);
             dateSpan += '<dt class="col-sm-6 font-weight-normal">'+edate+'</dt> <dd class="col-sm-6">'+sp[1]+'</dd>';
             $("#eventdate").html(dateSpan);
+            $("#ownerdetails").html('<a href="#"><img src="'+userDP+'" class="img-fluid d-flex mr-4 rounded-circle" alt="" width="70" /></a><div class="media-body align-self-center"><h6 class="mb-0"><a href="#" class="lis-dark">'+userName+'</a></h6></div>');
         }
     };
     $scope.tickets = [];
