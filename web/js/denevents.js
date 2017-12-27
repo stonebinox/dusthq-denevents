@@ -386,11 +386,12 @@ app.controller("event", function($scope, $http, $compile) {
                 $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
             $("#eventdesc").html('<p>'+eDesc+'</p>');
-            var dateSpan = '<span class="text-info">' + sdate + ' at ' + sp[1] + ' to ';
+            var dateSpan='<dt class="col-sm-6 font-weight-normal">'+sdate+'</dt> <dd class="col-sm-6">'+sp[1]+'</dd>';
+            // var dateSpan = '<span class="text-info">' + sdate + ' at ' + sp[1] + ' to ';
             sp = end.split(" ");
             var edate = dateFormat(sp[0]);
-            dateSpan += edate + ' at ' + sp[1] + '</span><br><p>' + address + '</p>';
-            $("#eventadd").html(dateSpan);
+            dateSpan += '<dt class="col-sm-6 font-weight-normal">'+edate+'</dt> <dd class="col-sm-6">'+sp[1]+'</dd>';
+            $("#eventdate").html(dateSpan);
         }
     };
     $scope.tickets = [];
