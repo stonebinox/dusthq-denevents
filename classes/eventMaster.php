@@ -377,16 +377,15 @@ class eventMaster extends eventTypeMaster
     {
         $app=$this->app;
         $search=trim(secure($search));
-        $em="SELECT idevent_master FROM event_master WHERE stat!='0' AND ";
+        $em="SELECT idevent_master FROM event_master WHERE stat!='0' AND (";
         $e=explode(" ",$search);
         foreach($e as $word)
         {
             $word=trim($word);
-            $em.="event_name LIKE '%$word%' AND event_description LIKE '%$word%' AND event_organizer LIKE '%$word%' AND event_address LIKE '%$word%' AND event_city LIKE '%$word%' AND event_topic LIKE '%$word%' AND ";
+            $em.="event_name LIKE '%$word%' OR event_description LIKE '%$word%' OR event_organizer LIKE '%$word%' OR event_address LIKE '%$word%' OR event_city LIKE '%$word%' OR event_topic LIKE '%$word%' OR ";
         }
-        $em=rtrim($em,"AND ");
-        $em.="ORDER BY hits DESC LIMIT 10";
-        echo $em;
+        $em=rtrim($em,"OR ");
+        $em.=") ORDER BY hits DESC LIMIT 10";
         $em=$app['db']->fetchAll($em);
         $eventArray=array();
         foreach($em as $eventRow)
