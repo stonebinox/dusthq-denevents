@@ -382,7 +382,7 @@ app.controller("event", function($scope, $http, $compile) {
                 "-moz-background-size": "cover",
                 "background-size": "cover"
             });
-            var text='<img src="'+userDP+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" style="width:100px;" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'&nbsp;&bull;&nbsp;<i class="fa fa-eye"></i> '+hits+'</p></div>';
+            var text='<img src="'+userDP+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" style="width:100px;" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i> '+hits+'</p></div>';
             // var text = '<h1>' + eventName + '</h1><strong>' + typeName + '&nbsp;&bull;&nbsp;' + eventTopic + '</strong><br><small>' + sdate + ' at ' + sp[1] + '</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
             $("#orgdetails").html('<i class="fa fa-user-o pr-2"></i> '+orgName);
