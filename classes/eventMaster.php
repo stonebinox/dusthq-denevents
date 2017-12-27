@@ -376,7 +376,7 @@ class eventMaster extends eventTypeMaster
     function searchEvents($search)
     {
         $app=$this->app;
-        $search=trim($secure($search));
+        $search=trim(secure($search));
         $em="SELECT idevent_master FROM event_master WHERE stat!='0' AND ";
         $e=explode(" ",$search);
         foreach($e as $word)
