@@ -1,3 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
     <body ng-app="denevents" ng-controller="event">
         <div id="header-fix" class="header fixed-top transperant" ng-init="getEvent();getLoginStatus();">
             <nav class="navbar navbar-toggleable-md navbar-expand-lg navbar-light py-lg-0 py-4">
@@ -917,3 +919,4 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjsIpyXFoB7_5_E2DgO_-CTDMHKM0cW4I&sensor=false&callback=initialize"></script>
         <script src="https://dusthq-denevents.herokuapp.com/js/single-map.js"></script>
     </body>
+{% endblock %}
