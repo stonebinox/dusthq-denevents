@@ -7,14 +7,14 @@
                 <div id="dl-menu" class="dl-menuwrapper d-block d-lg-none float-right">
                     <button>Open Menu</button>
                     <ul class="dl-menu">
-                        <li class="nav-item"><a class="nav-link" href="#">Browse events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://dusthq-denevents.herokuapp.com/">Browse events</a></li>
                         <li> <a href="login" class="text-white login_form"><i class="fa fa-sign-in pr-2"></i> Sign In | Register</a></li>
-                        <li> <a href="createEvent"><i class="fa fa-plus pr-1"></i> Create event</a></li>
+                        <li> <a href="../createEvent"><i class="fa fa-plus pr-1"></i> Create event</a></li>
                     </ul>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"> <a class="nav-link" href="#">Browse events</i></a></li>
+                        <li class="nav-item"> <a class="nav-link" href="https://dusthq-denevents.herokuapp.com/">Browse events</i></a></li>
                         <li class="nav-item dropdown" style="display:none;"> <a class="nav-link" href="#" data-toggle="dropdown" aria-expanded="false">Organize <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="nav-link" href="#">Overview</a></li>
@@ -35,7 +35,7 @@
                         <li>
                              <a href="#modal" class="text-white login_form"><i class="fa fa-sign-in pr-2"></i> Sign In | Register</a>
                         </li>
-                    </ul> <a href="createEvent" class="btn btn-outline-light btn-sm ml-0 ml-lg-4 mt-3 mt-lg-0"><i class="fa fa-plus pr-1"></i> Create event</a> </div>
+                    </ul> <a href="../createEvent" class="btn btn-outline-light btn-sm ml-0 ml-lg-4 mt-3 mt-lg-0"><i class="fa fa-plus pr-1"></i> Create event</a> </div>
             </nav>
         </div>
         <!--End header -->
@@ -739,176 +739,75 @@
             <div class="text-white mb-0 lis-line-height-1_7 h3"><i class="icofont icofont-long-arrow-up"></i></div>
         </a>
         <!-- End Top To Bottom-->
-       <!-- Login /Register Form-->
-
+        <!-- Login /Register Form-->
         <div class="container">
 
 
-
-
-
             <div id="modal" class="popupContainer" style="display: none;">
-
                 <header class="popupHeader">
-
                     <span class="header_title">Login</span>
-
                     <span class="modal_close"><i class="fa fa-times"></i></span>
-
                 </header>
 
-
-
                 <div class="popupBody">
-
                     <!-- Social Login -->						
 
-
-
                     <!-- Username & Password Login form -->
-
                     <div class="user_login">
+                        <form name="loginform" method="post" action="../login_action">
 
-                        <form>
-
-
-
-                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="username or email address" />
-
+                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="A valid email address" name="email" required />
                             <br />
 
 
-
-
-
-                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="password" />
-
+                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 " placeholder="Password" name="password" required />
                             <br />
-
-
-
-                            <div class="checkbox">
-
-                                <input id="remember" type="checkbox" />
-
-                                <label for="remember">Remember me on this computer</label>
-
-                            </div>
-
-
 
                             <div class="action_btns">
 
-
-
-                                <a href="#" class="btn btn-primary btn-default mt-3 w-100">Login</a>
-
+                                <a href="#" class="btn btn-primary btn-default mt-3 w-100" onclick="document.loginform.submit()">Login</a>
                             </div>
-
                         </form>
-
-                        <br/>
-
+                        <!--<br/>
                         Sign in with your social network<br/>
-
                         <ul class="list-inline my-0">
-
                             <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-facebook"></i></a></li>
-
                             <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-twitter"></i></a></li>
-
                             <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-linkedin"></i></a></li>
-
                             <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-tumblr"></i></a></li>
-
                             <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-pinterest-p"></i></a></li>
-
-                        </ul>
-
+                        </ul>-->
                         <hr/>
-
                         Don't have an account <a href="#" class="register_form">Sign Up</a>
-
                     </div>
-
-
 
                     <!-- Register Form -->
-
                     <div class="user_register">
+                        <form method="post" action="../create_action" name="createform" autocomplete="off">
 
-                        <form>
-
-
-
-                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Username" />
-
+                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Your name" name="name" required />
                             <br />
 
 
-
-
-
-                            <input type="email" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Email Address" />
-
+                            <input type="email" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="A valid email ID" name="email" required />
                             <br />
 
 
-
-
-
-                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Password" />
-
+                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Password" name="password" required />
                             <br />
 
-
-
-                            <div class="checkbox">
-
-                                <input id="send_updates" type="checkbox" />
-
-                                <label for="send_updates">Send me occasional email updates</label>
-
-                            </div>
-
-
+                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Repeat password" name="rpassword" required />
+                            <br />
 
                             <div class="action_btns">
-
-                                <a href="#" class="btn btn-primary btn-default mt-3 w-100">Register</a>
-
+                                <a href="#" class="btn btn-primary btn-default mt-3 w-100" onclick="document.createform.submit()">Register</a>
                             </div>
-
                         </form>
-
-                        <br/>
-
-                        Register with your social network<br/>
-
-                        <ul class="list-inline my-0">
-
-                            <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-facebook"></i></a></li>
-
-                            <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-twitter"></i></a></li>
-
-                            <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-linkedin"></i></a></li>
-
-                            <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-tumblr"></i></a></li>
-
-                            <li class="list-inline-item mr-0"><a href="#" class="lis-light lis-social border lis-brd-light text-center lis-line-height-2_3 rounded d-block"><i class="fa fa-pinterest-p"></i></a></li>
-
-                        </ul>
-
                         <hr/>
-
                         Already have an account <a href="#" class="login_form">Sign In</a>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <!-- End Login /Register Form-->
