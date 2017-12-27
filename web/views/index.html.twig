@@ -90,7 +90,7 @@
                     <div class="col-12 col-md-10 text-center">
                         <div class="heading pb-4">
                             <h5 class="lis-light">Find the best places</h5>
-                            <h2 class="f-weight-500">Discover Our Featured Categories.</h2> </div>
+                            <h2 class="f-weight-500">Discover Our Featured Categories</h2> </div>
                     </div>
                 </div>
             </div>
@@ -469,26 +469,24 @@
 
                     <!-- Register Form -->
                     <div class="user_register">
-                        <form>
+                        <form method="post" action="create_action" name="createform">
 
-                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Username" />
+                            <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Your name" name="name" required />
                             <br />
 
 
-                            <input type="email" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Email Address" />
+                            <input type="email" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="A valid email ID" name="email" required />
                             <br />
 
 
-                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Password" />
+                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Password" name="password" required />
                             <br />
 
-                            <div class="checkbox">
-                                <input id="send_updates" type="checkbox" />
-                                <label for="send_updates">Send me occasional email updates</label>
-                            </div>
+                            <input type="password" class="form-control border-top-0 border-left-0 border-right-0 rounded-0" placeholder="Repeat password" name="password2" required />
+                            <br />
 
                             <div class="action_btns">
-                                <a href="#" class="btn btn-primary btn-default mt-3 w-100">Register</a>
+                                <a href="#" class="btn btn-primary btn-default mt-3 w-100" onclick="document.createform.submit()">Register</a>
                             </div>
                         </form>
                         <br/>
