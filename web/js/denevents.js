@@ -385,7 +385,7 @@ app.controller("event", function($scope, $http, $compile) {
             } else {
                 $("#ticketdetails").html('<span class="text-warning">Coming soon</span>');
             }
-            $("#eventdesc").html(eDesc);
+            $("#eventdesc").html('<p>'+eDesc+'</p>');
             var dateSpan = '<span class="text-info">' + sdate + ' at ' + sp[1] + ' to ';
             sp = end.split(" ");
             var edate = dateFormat(sp[0]);
