@@ -363,6 +363,7 @@ app.controller("event", function($scope, $http, $compile) {
             var userID = user.iduser_master;
             var userEmail=user.user_email;
             var userDP=user.user_dp;
+            var userName=stripslashes(user.user_name);
             var orgName=event.event_organizer;
             var eventCity=event.event_city;
             if(!validate(userDP)){
@@ -393,6 +394,7 @@ app.controller("event", function($scope, $http, $compile) {
             dateSpan += '<dt class="col-sm-6 font-weight-normal">'+edate+'</dt> <dd class="col-sm-6">'+sp[1]+'</dd>';
             $("#eventdate").html(dateSpan);
             $("#ownerdetails").html('<a href="#"><img src="'+userDP+'" class="img-fluid d-flex mr-4 rounded-circle" alt="" width="70" /></a><div class="media-body align-self-center"><h6 class="mb-0"><a href="#" class="lis-dark">'+userName+'</a></h6></div>');
+            $("#owneremail").html('<i class="fa fa-envelope pr-2"></i> '+userEmail);
         }
     };
     $scope.tickets = [];
