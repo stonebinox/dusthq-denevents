@@ -359,13 +359,17 @@ app.controller("event", function($scope, $http, $compile) {
             var address = nl2br(stripslashes(event.event_address));
             var user = event.user_master_iduser_master;
             var userID = user.iduser_master;
+            var userDP=user.user_dp;
+            if(!validate(userDP)){
+                userDP='../images/defaultm.jpg';
+            }
             $(".background-image-maker").css({
                 "background": "#000000 url(" + eventImage + ") center",
                 "-webkit-background-size": "cover",
                 "-moz-background-size": "cover",
                 "background-size": "cover"
             });
-            var text='<img src="../'+eventImage+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'</p></div>';
+            var text='<img src="'+userDP+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'</p></div>';
             // var text = '<h1>' + eventName + '</h1><strong>' + typeName + '&nbsp;&bull;&nbsp;' + eventTopic + '</strong><br><small>' + sdate + ' at ' + sp[1] + '</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
             if (stat == 1) {
