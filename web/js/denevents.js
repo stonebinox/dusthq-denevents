@@ -359,7 +359,10 @@ app.controller("event", function($scope, $http, $compile) {
             var address = nl2br(stripslashes(event.event_address));
             var user = event.user_master_iduser_master;
             var userID = user.iduser_master;
+            var userEmail=user.user_email;
             var userDP=user.user_dp;
+            var orgName=event.event_organizer;
+            var eventCity=event.event_city;
             if(!validate(userDP)){
                 userDP='../images/defaultm.jpg';
             }
@@ -372,6 +375,9 @@ app.controller("event", function($scope, $http, $compile) {
             var text='<img src="'+userDP+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" style="width:100px;" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'</p></div>';
             // var text = '<h1>' + eventName + '</h1><strong>' + typeName + '&nbsp;&bull;&nbsp;' + eventTopic + '</strong><br><small>' + sdate + ' at ' + sp[1] + '</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
+            $("#orgdetails").html('<i class="fa fa-user-o pr-2"></i> '+orgName);
+            $("#orgemail").html('<a href="#" class="text-white"><i class="fa fa-envelope pr-2"></i> '+userEmail+'</a>');
+            $("#eventcity").html('<a href="#" class="text-white"><i class="fa fa-map-o pr-2"></i> '+eventCity+'</a>');
             if (stat == 1) {
                 $scope.getTickets();
             } else {
