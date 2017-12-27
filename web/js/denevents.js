@@ -442,15 +442,18 @@ app.controller("event", function($scope, $http, $compile) {
     $scope.displayTickets = function() {
         if (validate($scope.tickets)) {
             var tickets = $scope.tickets;
-            var text = '<table class="table"><thead><tr><th>Ticket name</th><th>Price</th></tr></thead><tbody>';
+            // var text = '<table class="table"><thead><tr><th>Ticket name</th><th>Price</th></tr></thead><tbody>';
+            var text='<div class="card-body p-4">';
             for (var i = 0; i < tickets.length; i++) {
                 var ticket = tickets[i];
                 var ticketID = ticket.idticket_master;
                 var ticketName = stripslashes(ticket.ticket_name);
                 var price = ticket.ticket_cost;
-                text += '<tr><td>' + ticketName + '</td><td>' + price + '</td></tr>';
+                // text += '<tr><td>' + ticketName + '</td><td>' + price + '</td></tr>';
+                text += '<div class="media d-block d-md-flex text-left"><div class="media-body align-self-center mt-sm-0 mt-3"><div class="float-none float-sm-right"> <a href="javascript:void(0)" class="btn btn-primary btn-default mb-1"> Book Now</a><p class="mb-0 mt-sm-0 mt-3">Entry Pass: <span class="lis-font-weight-500 lis-dark lis-font-poppins lis-font-weight-600">kr. '+price+'</span></p></div><p class="lis-dark mb-0 mt-2 mt-md-0">'+ticketName+'</div></div><div class="lis-devider my-4"></div>';
             }
-            text += '</tbody></table>';
+            // text += '</tbody></table>';
+            text += '</div>';
             $("#ticketdetails").html(text);
         }
     };
