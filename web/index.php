@@ -307,7 +307,7 @@ $app->get("/dashboard",function() use($app){
 });
 $app->get("/event/{eventID}",function($eventID) use($app){
     $app['session']->set("event_id",$eventID);
-    return $app['twig']->render("eventview.html.twig");
+    return $app['twig']->render("eventview2.html.twig");
 });
 $app->get("/events/getEvent",function() use($app){
     if($app['session']->get("event_id"))
