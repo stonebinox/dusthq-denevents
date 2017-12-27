@@ -365,7 +365,7 @@ app.controller("event", function($scope, $http, $compile) {
                 "-moz-background-size": "cover",
                 "background-size": "cover"
             });
-            var text='<img src="'+eventImage+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'</p></div>';
+            var text='<img src="../'+eventImage+'" class="img-fluid d-md-flex mr-4 border border-white lis-border-width-4 rounded mb-4 mb-md-0" alt="'+eventName+'" /><div class="media-body align-self-center"><h2 class="text-white font-weight-bold lis-line-height-1">'+eventName+'</h2><p class="mb-0">'+eventTopic+'</p></div>';
             // var text = '<h1>' + eventName + '</h1><strong>' + typeName + '&nbsp;&bull;&nbsp;' + eventTopic + '</strong><br><small>' + sdate + ' at ' + sp[1] + '</small><div id="ticketdetails"></div>';
             $("#eventdetails").html(text);
             if (stat == 1) {
