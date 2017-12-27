@@ -307,6 +307,12 @@ $app->get("/dashboard",function() use($app){
 });
 $app->get("/event/{eventID}",function($eventID) use($app){
     $app['session']->set("event_id",$eventID);
+    require("../classes/adminMaster.php");
+    require("../classes/userMaster.php");
+    require("../classes/eventTypeMaster.php");
+    require("../classes/eventMaster.php");
+    $event=new eventMaster($eventID);
+    $response=$event->hitEvent();
     return $app['twig']->render("eventview2.html.twig");
 });
 $app->get("/events/getEvent",function() use($app){
@@ -323,6 +329,26 @@ $app->get("/events/getEvent",function() use($app){
             return json_encode($eventData);
         }
         return $eventData;
+    }
+    else
+    {
+        return "INVALID_PARAMETERS";
+    }
+});
+$app->get("/events/search",function(Request $request) use($app){
+    if($request->get("search"))
+    {
+        require("../classes/adminMaster.php");
+        require("../classes/userMaster.php");
+        require("../classes/eventTypeMaster.php");
+        require("../classes/eventMaster.php");
+        $event=new eventMaster;
+        $response=$event->searchEvents($request->get("search"));
+        if(is_array($response))
+        {
+            return json_encode($response);
+        }
+        return $response;
     }
     else
     {

@@ -373,5 +373,77 @@ class eventMaster extends eventTypeMaster
             return "INVALID_EVENT_ID";
         }
     }
+    function searchEvents($search)
+    {
+        $app=$this->app;
+        $search=trim($secure($search));
+        $em="SELECT idevent_master FROM event_master WHERE stat!='0' AND ";
+        $e=explode(" ",$search);
+        foreach($e as $word)
+        {
+            $word=trim($word);
+            $em.="event_name LIKE '%$word%' AND event_description LIKE '%$word%' AND event_organizer LIKE '%$word%' AND event_address LIKE '%$word%' AND event_city LIKE '%$word%' AND event_topic LIKE '%$word%' AND ";
+        }
+        $em=rtrim($em,"AND ");
+        $em.="ORDER BY hits DESC LIMIT 10";
+        $em=$app['db']->fetchAll($em);
+        $eventArray=array();
+        foreach($em as $eventRow)
+        {
+            $eventID=$eventRow['idevent_master'];
+            $this->__construct($eventID);
+            $event=$this->getEvent();
+            if(is_array($event))
+            {
+                array_push($eventArray,$event);
+            }
+        }
+        if(count($eventArray)>0)
+        {
+            return $eventArray;
+        }
+        else
+        {
+            return "NO_EVENTS_FOUND";
+        }
+    }
+    function getEventHits()
+    {
+        if($this->eventValid)
+        {
+            $app=$this->app;
+            $eventID=$this->event_id;
+            $em="SELECT hits FROM event_master WHERE idevent_master='$eventID'";
+            $em=$app['db']->fetchAssoc($em);
+            if(validate($em))
+            {
+                return $em['hits'];
+            }
+            else
+            {
+                return "INVALID_EVENT_ID";
+            }
+        }
+        else
+        {
+            return "INVALID_EVENT_ID";
+        }
+    }
+    function hitEvent()
+    {
+        if($this->eventValid)
+        {
+            $app=$this->app;
+            $eventID=$this->event_id;
+            $hits=$this->getEventHits()+1;
+            $up="UPDATE event_master SET hits='$hits' WHERE idevent_master='$eventID'";
+            $up=$app['db']->executeUpdate($up);
+            return "EVENT_HITS_UPDATED";
+        }
+        else
+        {
+            return "INVALID_EVENT_ID";
+        }
+    }
 }
 ?>
