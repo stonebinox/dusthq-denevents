@@ -315,6 +315,7 @@ app.controller("event", function($scope, $http, $compile) {
                 });
     };
     $scope.event = null;
+    $scope.event_id=null;
     $scope.getEvent = function() {
         $http.get("../events/getEvent")
             .then(function success(response) {
@@ -344,6 +345,7 @@ app.controller("event", function($scope, $http, $compile) {
         if (validate($scope.event)) {
             var event = $scope.event;
             var eventID = event.idevent_master;
+            $scope.event_id=eventID;
             var eventName = stripslashes(event.event_name);
             var eventImage = event.event_image;
             var stat = event.stat;
