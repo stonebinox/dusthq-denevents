@@ -1,6 +1,4 @@
-Skeleton
+Denevents
 ==============
 
-This web app skeleton is for a Silex based app.
-
-Works well when hosted to Heroku. Configured to run with Heroku's ClearDB MySQL add-on.
+This app is for a Denmark based client who wanted his version of Eventbrite exclusively for Denmark based events.
